@@ -3,36 +3,61 @@ import './anuragstyles.css'
 
 import { useState,useEffect } from 'react'
 import Card from './Card'
+import axios from 'axios';
+import config from './terms';
+
 
 
 const ViewEmployee = () => {
-    const src ='E:/ppd/sample/src/imgs/sample.jpg';
+    
     const [view,setView] = useState();
+    const [add,setAdd]=useState(false);
+    const [data,setData]=useState({});
+    
      
     
 
-    const [data,setData]= useState([
-      {name: "Anurag Bhattacharjee",empid:10,salary: 18,address: "location X"}, {name: "Anurag Bhattacharjee",empid:10,salary: 18,address: "location X"}, {name: "Anurag Bhattacharjee",empid:10,salary: 18,address: "location X"}, {name: "Anurag Bhattacharjee",empid:1,salary: 10,address: "location A"},{name: "Sanjay G",empid:2,salary: 30,address: "location C"},{name: "Chandru R",empid:3,salary: 30,address: "location D"},{name: "Muhammed Razin",empid:4,salary: 40,address: "location E"},{name: "Shubham Lingwal",empid:5,salary: 40,address: "location F"},{name: "Anurag Bhattacharjee",empid:7,salary: 50,address: "location G"}
-    ])
+    
     const [inp,setInp]= useState("")
     const [found, setFound] = useState()
+    const url = `http://${config.v}:${config.port}/employee?name=${inp}`
     const p=(datum)=>{
       setView(datum)
     }
     const  handlesearch = async () => {
-        const name = inp;
-        const foundData = data.filter((datum) => datum.name === name);
+      
+        const finding = await axios.get(url);
+
+        
+        const foundData = finding.data
+        console.log(foundData)
         if(foundData.length===0){
             setFound()
         }else{
         setFound(foundData)}
-        console.log(foundData)
+        
       };
       const customfunc1 = (datum) => {
         setView(datum);
        
 
       };
+
+      const push= async()=>{
+        console.log(data);
+          const {name,salary,address,role,id} = data;
+          console.log(name);
+          console.log(salary);
+          console.log(address);
+          console.log(role);
+          console.log(id);
+          const rep = await axios.post(`http://${config.v}:${config.port}/addemployee`,{empname:name,empsalary:salary,empaddress:address,emprole: role,empid: id});
+          if(rep.data==="already exists"){
+            window.alert("User already exists");          }else{
+              window.alert("user successfully added")
+            }
+
+    }
       
 
   return (
@@ -40,7 +65,7 @@ const ViewEmployee = () => {
       <h2 className='heading' >Employee Information search portal</h2>
       <div className="inpone">
       <p className='inptext'>Enter Employee name</p>
-    <input value={inp} className='inp' onChange={(e)=>{setInp(e.target.value)}} type='text'/><input className='button' id='searchemp' type='button' onClick={handlesearch} value="Search"/>
+    <input className='button' id='addemp' type='button' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='button' id='searchemp' type='button' disabled={add} onClick={handlesearch} value="Search"/>
       
     </div>
     {found && <div className='megbox'>
@@ -63,20 +88,49 @@ const ViewEmployee = () => {
         <p className='deti'>  Employee id: {view.empid}</p>
         <p className='deti'>  Salary: {view.salary}</p>
         <p className='deti'>  Address: {view.address}</p>
+        <p className='deti'>  Role : {view.role}</p>
         </div>
         <div className='photoback'>
           <div className='photoholder'>
           <div className='empphoto'><p>photo</p>
             </div></div><div className='buttonhold'>
-            <input type='button' id='gobackemp' className='button' value="return" onClick={()=>{setView();}}/>
+            <input type='button' id='gobackemp' className='button' value="return" onClick={()=>{setView()}}/>
             </div></div>
 
     </div></>)}
+
+   
     
     
       
     
     </div>}
+    {
+      add && (<>
+      <div className='megbox' id="addmeg">
+      <div className='empbox' id='forms'>
+      <div className="inptwo">
+      <p className='inptext'>Enter Employee name</p>
+      <input name='name' value={data.name} onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
+      
+      <div className="inptwo">
+        <p className='inptext'>Enter Employee role</p>
+     <input value={data.role} name='role' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
+      
+      <div className="inptwo">
+        <p className='inptext'>Enter Employee address</p>
+      <input value={data.address} name='address' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
+      <div className="inptwo">
+        <p className='inptext'>Enter Employee salary</p>
+      <input value={data.salary} name='salary' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='number'/></div>
+      <div className='inptwo'><p className='inptext'>Enter Employee Id</p>
+      <input value={data.id} name='id' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='number'/></div>
+     <div> <input type='button' id="addreturn"  className='button' value="return" onClick={()=>{setAdd(false);setData({});}}/><input type='button' id="addbut" className='button' value="Add employee" onClick={push}/></div>
+      </div>
+      </div>
+     
+      </>)
+    }
 
 
     </div>

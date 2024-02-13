@@ -11,7 +11,7 @@ const Data = (props) => {
     <>
     <div className='link'></div>
     <div style={{display : "flex", flexDirection: "row"}}>
-    <div onClick={()=>{fun(info)}} className={!hover?'datpt':'ddt'} onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}></div> <div style={{marginBottom: "0"}}>- {info.time}</div></div>
+    <div onClick={()=>{fun(info)}} className={!hover?'datpt':'ddt'} onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}></div> <div style={{paddingBottom: "2px"}}>- {info.time}</div></div>
     </>
   )
 }
