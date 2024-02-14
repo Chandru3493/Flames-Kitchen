@@ -25,12 +25,12 @@ const ViewEmployee = () => {
       setView(datum)
     }
     const  handlesearch = async () => {
-      
+       setView();
         const finding = await axios.get(url);
 
         
         const foundData = finding.data
-        console.log(foundData)
+       
         if(foundData.length===0){
             setFound()
         }else{
@@ -44,14 +44,10 @@ const ViewEmployee = () => {
       };
 
       const push= async()=>{
-        console.log(data);
+        
           const {name,salary,address,role,id} = data;
-          console.log(name);
-          console.log(salary);
-          console.log(address);
-          console.log(role);
-          console.log(id);
-          const rep = await axios.post(`http://${config.v}:${config.port}/addemployee`,{empname:name,empsalary:salary,empaddress:address,emprole: role,empid: id});
+          
+          const rep = await axios.post(`http://${config.v}:${config.port}/addemployee`,{empname:name,empsalary:Number(salary),empaddress:address,emprole: role,empid: Number(id)});
           if(rep.data==="already exists"){
             window.alert("User already exists");          }else{
               window.alert("user successfully added")
@@ -65,12 +61,12 @@ const ViewEmployee = () => {
       <h2 className='heading' >Employee Information search portal</h2>
       <div className="inpone">
       <p className='inptext'>Enter Employee name</p>
-    <input className='button' id='addemp' type='button' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='button' id='searchemp' type='button' disabled={add} onClick={handlesearch} value="Search"/>
+    <input className='buttona' id='addemp' type='button' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='buttona' id='searchemp' type='button' disabled={add} onClick={handlesearch} value="Search"/>
       
     </div>
     {found && <div className='megbox'>
     
-    {!view && <><p className='inptext' id='res'>Results</p><div className='box'>
+    {!view && <><p className='inptext' id='res'>Results</p><div className='boxy'>
       
         {found.map((datum,index)=>(
           
@@ -94,7 +90,7 @@ const ViewEmployee = () => {
           <div className='photoholder'>
           <div className='empphoto'><p>photo</p>
             </div></div><div className='buttonhold'>
-            <input type='button' id='gobackemp' className='button' value="return" onClick={()=>{setView()}}/>
+            <input type='button' id='gobackemp' className='buttona' value="return" onClick={()=>{setView()}}/>
             </div></div>
 
     </div></>)}
@@ -125,7 +121,7 @@ const ViewEmployee = () => {
       <input value={data.salary} name='salary' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='number'/></div>
       <div className='inptwo'><p className='inptext'>Enter Employee Id</p>
       <input value={data.id} name='id' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='number'/></div>
-     <div> <input type='button' id="addreturn"  className='button' value="return" onClick={()=>{setAdd(false);setData({});}}/><input type='button' id="addbut" className='button' value="Add employee" onClick={push}/></div>
+     <div> <input type='button' id="addreturn"  className='buttona' value="return" onClick={()=>{setAdd(false);setData({});}}/><input type='button' id="addbut" className='buttona' value="Add employee" onClick={push}/></div>
       </div>
       </div>
      

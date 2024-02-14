@@ -47,10 +47,10 @@
 }
 
 
-.button {
+.buttona {
     background-color: #FFC529; /* Yellow background */
     color: black; /* Black text color */
-    padding: 10px 20px; /* Adjust padding as needed */
+    padding: 10px 10px; /* Adjust padding as needed */
     border: none; /* Remove default border */
     border-radius: 10px; /* Rounded corners */
     cursor: pointer; /* Hand cursor on hover */
@@ -141,7 +141,7 @@ font: 25px sans-serif;
 }
 
 #fininp{
-    margin-left: 35%;
+    margin-left: 35.5%;
 
 }
 
@@ -150,7 +150,11 @@ font: 25px sans-serif;
     width: 30%;
 }
 
-
+.vissearch{
+  
+  display: flex;
+  flex-direction: row;
+}
 
 #searchemp {
     margin-left: 5px;
@@ -172,7 +176,7 @@ font: 25px sans-serif;
 #res {
     margin-top: 50px;margin-left: 10%;font-size: 70%;
 }
-.box {
+.boxy {
     border-color: rgb(78, 78, 78);
     border-radius: 10px;
     border-style: solid;
@@ -228,8 +232,8 @@ width: 70%;
     
   
     border-radius: 50%;
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
     background-color: #FE724C;
     text-align: center;margin-left: 2%;
     
@@ -287,8 +291,8 @@ width: 70%;
 }
 
 .ddt{border-radius: 50%;
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     background-color: #D7D7D7;
     text-align: center;
     margin-left: 2%;
@@ -356,16 +360,16 @@ width: 70%;
     font-size: 60%;
   }
 
-  .cardtext {
+  .cardtexti {
     width: 70%;
     
     font-size: 70%;
   }
 
-  .card {
+  .cardi {
     background-color: #FE724C; /* Yellow background */
     color: black; /* Black text color */
-    padding: 10px 10px; /* Adjust padding as needed */
+    padding: 20px 20px; /* Adjust padding as needed */
     border-color: #272D2F;
     border-style: solid; /* Remove default border */
     border-radius: 10px; /* Rounded corners */
@@ -373,14 +377,14 @@ width: 70%;
     font-weight: bold; /* Bold text */
     display: flex;
     flex-direction: row;
-    width: 30%;
+    width: 200px;
     margin: 4px;
   }
 
-  .cardphoto {
+  .cardphotoi {
     font-size: 50%;
-    width: 25%;
-    height: 40%;
+    width: 30%;
+    height: 30%;
     border-radius: 50%;
     border-style: solid;
     border-radius: 1px;
@@ -444,6 +448,7 @@ width: 70%;
 
 .abovefin{
     width: 100vmax;
+    
    
 
 }

@@ -4,11 +4,11 @@ import './anuragstyles.css'
 const Card = (props) => {
   const datum = props.input
   return(
-    <div className='card' onClick={()=>{console.log(datum);props.fun(datum)}}>
-     <div className='cardtext'>
+    <div className='cardi' onClick={()=>{console.log(datum);props.fun(datum)}}>
+     <div className='cardtexti'>
      <p>Name: {datum.name}</p>
      <p>id: {datum.empid}</p></div>
-     <div className='cardphoto'>photo</div>
+     <div className='cardphotoi'>photo</div>
     </div>
   )
 }
