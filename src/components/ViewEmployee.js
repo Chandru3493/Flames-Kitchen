@@ -81,7 +81,6 @@ const ViewEmployee = () => {
     
       <div className='empdet'>
         <p className='deti'>  Name : {view.name}</p>
-        <p className='deti'>  Employee id: {view.id}</p>
         <p className='deti'>  Employee email id: {view.email_id}</p>
         <p className='deti'>  Salary: {view.salary}</p>
         <p className='deti'>  Address: {view.address}</p>
