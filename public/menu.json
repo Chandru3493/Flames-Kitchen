@@ -1,0 +1,81 @@
+{
+    "restaurant": "Flames Kitchen",
+    "location": "123 Main Street, Chennai",
+    "menu": [
+        {
+            "name": "Paneer Tikka",
+            "description": "Cubes of paneer marinated in spices and grilled to perfection.",
+            "price": 90
+        },
+        {
+            "name": "Samosa",
+            "description": "Crispy pastry filled with spiced potatoes and peas.",
+            "price": 70
+        },
+        {
+            "name": "Papdi Chaat",
+            "description": "Crispy wafers served with boiled potatoes, chickpeas, and yogurt.",
+            "price": 80
+        },
+        {
+            "name": "Hara Bhara Kabab",
+            "description": "Vegetarian kababs made with spinach, potatoes, and green peas.",
+            "price": 85
+        },
+        {
+            "name": "Onion Bhaji",
+            "description": "Crispy fritters made from thinly sliced onions mixed with spices.",
+            "price": 60
+        },
+        {
+            "name": "Butter Chicken",
+            "description": "Tender pieces of chicken cooked in a rich and creamy tomato-based sauce.",
+            "price": 120
+        },
+        {
+            "name": "Dal Makhani",
+            "description": "Creamy lentils cooked with butter and spices, a North Indian classic.",
+            "price": 100
+        },
+        {
+            "name": "Palak Paneer",
+            "description": "Cottage cheese cubes cooked in a creamy spinach gravy.",
+            "price": 110
+        },
+        {
+            "name": "Chicken Tikka Masala",
+            "description": "Grilled chicken cooked in a rich tomato-based sauce with aromatic spices.",
+            "price": 130
+        },
+        {
+            "name": "Chole Bhature",
+            "description": "Spicy chickpea curry served with fried bread.",
+            "price": 95
+        },
+        {
+            "name": "Gulab Jamun",
+            "description": "Soft and spongy milk solids soaked in rose-flavored sugar syrup.",
+            "price": 50
+        },
+        {
+            "name": "Rasmalai",
+            "description": "Sweet cottage cheese dumplings soaked in flavored milk.",
+            "price": 80
+        },
+        {
+            "name": "Kheer",
+            "description": "Indian rice pudding made with milk, rice, and flavored with cardamom.",
+            "price": 70
+        },
+        {
+            "name": "Gajar Halwa",
+            "description": "Sweet dessert pudding made with carrots, milk, and sugar.",
+            "price": 90
+        },
+        {
+            "name": "Jalebi",
+            "description": "Deep-fried batter soaked in sugar syrup, crispy and sweet.",
+            "price": 65
+        }
+    ]
+}
