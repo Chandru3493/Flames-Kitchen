@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginForm.css"; // Import the CSS file for styling
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // Adjusted import statement
 
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [showCustomAlert, setShowCustomAlert] = useState(false); // State to control custom alert visibility
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -51,7 +53,6 @@ function LoginForm() {
           },
           body: JSON.stringify({ username, password }),
         });
-        console.log("Request sent");
 
         if (!response.ok) {
           throw new Error("Login failed");
@@ -60,26 +61,20 @@ function LoginForm() {
         // Parse the JSON data from the response body
         const responseData = await response.json();
 
-        console.log("SUCCESSFUL LOGIN", responseData);
+        // Store the token in local storage
+        localStorage.setItem("token", responseData.token);
 
-        // Access the username value from the responseData object
-        const loggedInUserrole = responseData[0].user_role;
-        console.log("Logged in username:", loggedInUserrole);
-
-        if (loggedInUserrole === "admin") {
-          // Redirect to the admin page
+        // Redirect based on user role
+        const decodedToken = jwtDecode(responseData.token);
+        if (decodedToken.user_role === "admin") {
           navigate("/admin");
-        } else if (loggedInUserrole === "cook") {
-          // Redirect to the cook page
+        } else if (decodedToken.user_role === "cook") {
           navigate("/cook");
-        } else if (loggedInUserrole === "waiter") {
-          // Redirect to the waiter page
+        } else if (decodedToken.user_role === "waiter") {
           navigate("/waiter");
         }
-
-        // Handle successful login, e.g., redirect to another page
       } catch (error) {
-        alert("Wrong Login ID and Password");
+        setShowCustomAlert(true); // Show custom alert
         // Handle login error, e.g., display an error message to the user
       }
     } else {
@@ -88,45 +83,70 @@ function LoginForm() {
     }
   };
 
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken && (decodedToken.user_role === "admin" || decodedToken.user_role === "cook" || decodedToken.user_role === "waiter")) {
+        navigate(`/${decodedToken.user_role}`);
+      }
+    }
+  }, []);
+
   return (
-    <div className="login-background">
-      <div className="login-container">
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Email</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={handleUsernameChange}
-              required
-            />
-            <br />
-            {errors.username && (
-              <span className="error">{errors.username}</span>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
+    <div id="main">
+      <div className="login-background">
+        <div className="login-container">
           <center>
-            <button type="submit" className="btn-login">
-              Login
-            </button>
+            <h2>Flame's Kitchen</h2>
           </center>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="username">Email</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={handleUsernameChange}
+                required
+              />
+              <br />
+              {errors.username && (
+                <span className="error">{errors.username}</span>
+              )}
+            </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              {errors.password && (
+                <span className="error">{errors.password}</span>
+              )}
+            </div>
+            <center>
+              <button type="submit" className="btn-login">
+                Log In
+              </button>
+            </center>
+          </form>
+          {showCustomAlert && (
+            <div className="custom-alert">
+              <div className="custom-alert-content">
+                <center>
+                  <span id="LoginFrom-waringSign">Wrong ID and Password</span>
+                </center>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,74 @@
+#SignUp {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  background-color: #ffc529;
+}
+
+#SignUp form {
+  margin-bottom: 20px;
+}
+
+#SignUp form {
+  background-color: white;
+  padding: 30px 50px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+#SignUp form div {
+  margin-bottom: 10px;
+}
+
+#SignUp label {
+  font-weight: bold;
+}
+
+#SignUp input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#SignUp span {
+  color: red;
+}
+
+#backendError span {
+  color: red;
+}
+
+#SignUpButton,
+#RemoveCredentialsButton {
+  background-color: #ffc529; /* Yellow background */
+  color: black; /* Black text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Hand cursor on hover */
+  font-weight: bold; /* Bold text */
+  color: #121221;
+  margin: 20px;
+}
+
+#SignUpButton:hover,
+#RemoveCredentialsButton:hover {
+  background-color: #efb925;
+}
+
+#SignUpButton:active,
+#RemoveCredentialsButton:active {
+  background-color: #efb925;
+}
+
+#SignUpButton:focus,
+#RemoveCredentialsButton:focus {
+  outline: none;
+}

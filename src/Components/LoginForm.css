@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap");
+
 .login-background {
   display: flex;
   justify-content: center;
@@ -60,6 +62,7 @@
   cursor: pointer; /* Hand cursor on hover */
   font-weight: bold; /* Bold text */
   color: #121221;
+  margin: 20px;
 }
 
 .btn-login:hover {
@@ -95,8 +98,17 @@
   margin-top: 10px;
 }
 
-span {
+#LoginFrom-waringSign {
   color: red;
   font-style: italic;
   padding: 5px;
+}
+
+.login-container h2 {
+  padding: 0;
+  margin: 0px;
+  font-size: 35px;
+  padding-bottom: 15px;
+  font-family: "Protest Revolution", sans-serif;
+  font-style: normal;
 }

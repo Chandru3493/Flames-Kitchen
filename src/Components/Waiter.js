@@ -1,11 +1,22 @@
-// AnotherModule.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Waiter() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem("token");
+    // Redirect to the login page
+    navigate("/");
+  };
+
   return (
     <div>
-      <h2>Waiter Module</h2>
+      <h3>Waiter Module</h3>
       <p>This is waiter module in your application.</p>
+      {/* Logout Button */}
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
