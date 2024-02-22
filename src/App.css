@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+body {
+  background-color: #272d2f;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.table-grid {
+  padding: 20px;
+  padding-left: 50px;
+  margin: 5% 0; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 40px; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.table-button {
+  width: 200px; 
+  height: 200px;
+  border-radius: 15px; 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  font-size: 18px; 
 }
 
-.App-link {
-  color: #61dafb;
+/* Status Colors */
+.table-button[variant="success"] {  
+  background-color: green; 
+  color: white; 
+}
+.table-button[variant="info"] {  
+  background-color: lightblue; 
+} 
+.table-button[variant="danger"] {  
+  background-color: red; 
+}
+.table-button[variant="warning"] {  
+  background-color: yellow; 
+} 
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Use min-height instead of height */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.content-wrapper {
+  display: flex;
+  flex: 1.5;
 }
+
+.side-area {
+  padding: 10px;
+  display: flex; /* Use flexbox to arrange the sidebar and notifications board */
+  flex-direction: column; /* Arrange them vertically */
+  flex: 1; /* Take up remaining space */
+}
+
+.sidebar,
+.notifications-board {
+  background-color: #ffc529;
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5%;
+  flex: 1; /* Take up equal space within the side area */
+  margin: 10px; /* Add margin as needed */
+}
+
+
+.restaurant-name {
+  font-family: Copperplate, Papyrus, fantasy;
+  color: #fe724c;
+  font-size: 30px;
+  padding-left: 5%;
+  font-weight: bold;
+  font-stretch: extra-expanded;
+}
+
+.welcome-message {
+  padding-left: 5%;
+  font-size: 30px;
+  color: #d7d7d7;
+  font-family: luminari, fantasy;
+}
+
+/* Status Colors */
+.table-button.info {
+  background-color: lightblue;
+}
+
+.table-button.danger {
+  background-color: red;
+}
+
+.table-button.success {
+  background-color: green;
+}
+
+.table-button.warning {
+  background-color: yellow;
+}
+
