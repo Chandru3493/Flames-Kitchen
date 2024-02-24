@@ -8,7 +8,7 @@ const Card = (props) => {
      <div className='cardtexti'>
      <p>Name: {datum.name}</p>
      <p>email: {datum.email_id}</p></div>
-     <div className='cardphotoi'>photo</div>
+     
     </div>
   )
 }

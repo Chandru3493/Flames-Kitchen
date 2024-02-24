@@ -12,7 +12,7 @@ const ViewEmployee = () => {
     
     const [view,setView] = useState();
     const [add,setAdd]=useState(false);
-    const [data,setData]=useState({});
+    const [data,setData]=useState({role: 'admin'});
     
      
     
@@ -46,7 +46,7 @@ const ViewEmployee = () => {
       const push= async()=>{
         
           const {name,salary,address,role,email,password} = data;
-          
+          console.log(role)
           const rep = await axios.post(`http://${config.v}:${config.port}/addemployee`,{empname:name,empsalary:Number(salary),empaddress:address,emprole: role,emailid: email,password: password});
           if(rep.data==="already exists"){
             window.alert("User already exists");          }else{
@@ -82,6 +82,7 @@ const ViewEmployee = () => {
       <div className='empdet'>
         <p className='deti'>  Name : {view.name}</p>
         <p className='deti'>  Employee email id: {view.email_id}</p>
+        <p className='deti'>  Employee id: {view.id}</p>
         <p className='deti'>  Salary: {view.salary}</p>
         <p className='deti'>  Address: {view.address}</p>
         <p className='deti'>  Role : {view.role}</p>
@@ -89,9 +90,7 @@ const ViewEmployee = () => {
         <p className='deti'>  Last Updation : {view.updatedAt}</p>
         </div>
         <div className='photoback'>
-          <div className='photoholder'>
-          <div className='empphoto'><p>photo</p>
-            </div></div><div className='buttonhold'>
+          <div className='buttonhold'>
             <input type='button' id='gobackemp' className='buttona' value="return" onClick={()=>{setView()}}/>
             </div></div>
 
@@ -113,7 +112,12 @@ const ViewEmployee = () => {
       
       <div className="inptwo">
         <p className='inptext'>Enter Employee role</p>
-     <input value={data.role} name='role' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
+     <select value={data.role} name='role' onChange={(e)=>{setData({...data,role : e.target.value})}}  >
+     <option disabled={true}>Please select a role</option>
+      <option value='waiter' >waiter</option>
+      <option value='admin' >admin</option>
+      <option value='cook'>cook</option>
+      </select></div>
       
       <div className="inptwo">
         <p className='inptext'>Enter Employee address</p>
@@ -124,7 +128,7 @@ const ViewEmployee = () => {
       <div className='inptwo'><p className='inptext'>Enter Employee email</p>
       <input value={data.email} name='email' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
       <div className='inptwo'><p className='inptext'>Enter Employee password</p>
-      <input value={data.password} name='password' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='password'/></div>
+      <input value={data.password} name='password' onChange={(e)=>{setData({...data,[e.target.name] : e.target.value})}} type='password'/></div>
      <div> <input type='button' id="addreturn"  className='buttona' value="return" onClick={()=>{setAdd(false);setData({});}}/><input type='button' id="addbut" className='buttona' value="Add employee" onClick={push}/></div>
       </div>
       </div>
