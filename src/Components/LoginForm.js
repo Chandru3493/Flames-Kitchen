@@ -1,132 +1,121 @@
 import React, { useState } from "react";
-import "./LoginForm.css"; // Import the CSS file for styling
+import { jwtDecode } from "jwt-decode";
+import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [showCustomAlert, setShowCustomAlert] = useState(false);
   const navigate = useNavigate();
 
-  const handleUsernameChange = (event) => {
+  const handleEmailChange = (event) => {
     const { value } = event.target;
-    setUsername(value);
-
-    // Validate email dynamically as the user types
-    const errors = {};
-
-    if (!value.trim()) {
-      errors.username = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(value)) {
-      errors.username = "Invalid email format";
-    }
-
-    setErrors(errors);
+    setEmail(value);
+    setErrors({});
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+    setErrors({});
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const errors = {};
 
-    if (!username.trim()) {
-      errors.username = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(username)) {
-      errors.username = "Invalid email format";
+    if (!email.trim()) {
+      setErrors({ email: "Email is required" });
+      return;
     }
 
     if (!password.trim()) {
-      errors.password = "Password is required";
+      setErrors({ password: "Password is required" });
+      return;
     }
 
-    if (Object.keys(errors).length === 0) {
-      try {
-        const response = await fetch("http://localhost:3000/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        });
-        console.log("Request sent");
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        if (!response.ok) {
-          throw new Error("Login failed");
-        }
-
-        // Parse the JSON data from the response body
-        const responseData = await response.json();
-
-        console.log("SUCCESSFUL LOGIN", responseData);
-
-        // Access the username value from the responseData object
-        const loggedInUserrole = responseData[0].user_role;
-        console.log("Logged in username:", loggedInUserrole);
-
-        if (loggedInUserrole === "admin") {
-          // Redirect to the admin page
-          navigate("/admin");
-        } else if (loggedInUserrole === "cook") {
-          // Redirect to the cook page
-          navigate("/cook");
-        } else if (loggedInUserrole === "waiter") {
-          // Redirect to the waiter page
-          navigate("/waiter");
-        }
-
-        // Handle successful login, e.g., redirect to another page
-      } catch (error) {
-        alert("Wrong Login ID and Password");
-        // Handle login error, e.g., display an error message to the user
+      if (!response.ok) {
+        throw new Error("Login failed");
       }
-    } else {
-      // Set errors state to display error messages
-      setErrors(errors);
+
+      const responseData = await response.json();
+      const { user_id, token, user_roleId} = responseData; // Change user_role to user_id
+      
+      const decodedToken = jwtDecode(token);
+      console.log("user ID:", decodedToken.userId);
+      console.log("User Role:", user_roleId);
+
+      if (user_roleId === 1) {
+        navigate("/Fp0wLkQgHe3iMl7n4NqT");
+      } else if (user_roleId === 3) {
+        navigate("/9v3pUZxEsR2dYr6wGh0I");
+      } else if (user_roleId === 2) {
+        navigate("/s8JcN7Q0kD3gT1fH4zYb");
+      }
+    } catch (error) {
+      setShowCustomAlert(true);
+      console.error("Login error:", error);
     }
   };
 
   return (
-    <div className="login-background">
-      <div className="login-container">
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Email</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={handleUsernameChange}
-              required
-            />
-            <br />
-            {errors.username && (
-              <span className="error">{errors.username}</span>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
+    <div id="main">
+      <div className="login-background">
+        <div className="login-container">
           <center>
-            <button type="submit" className="btn-login">
-              Login
-            </button>
+            <h2>Flame's Kitchen</h2>
           </center>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+              <br />
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+            <center>
+              <button type="submit" className="btn-login">
+                Log In
+              </button>
+            </center>
+          </form>
+          {showCustomAlert && (
+            <div className="custom-alert">
+              <div className="custom-alert-content">
+                <center>
+                  <span id="LoginFrom-waringSign">Wrong ID and Password</span>
+                </center>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

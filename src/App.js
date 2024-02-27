@@ -11,9 +11,9 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<LoginForm />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/cook" element={<Cook />} />
-        <Route path="/waiter" element={<Waiter />} />
+        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin />} />
+        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Cook />} />
+        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter />} />
       </Routes>
     </div>
   );
