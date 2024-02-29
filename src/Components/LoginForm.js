@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
+import logo from "./Logo.png";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -69,6 +70,7 @@ function LoginForm() {
 
   return (
     <div id="main">
+      <img src={logo} alt="Flame-s-Kitchen-Logo"  id="Hotel_logo"/>
       <div className="login-background">
         <div className="login-container">
           <center>

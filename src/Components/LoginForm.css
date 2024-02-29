@@ -112,3 +112,17 @@
   font-family: "Protest Revolution", sans-serif;
   font-style: normal;
 }
+
+#Hotel_logo{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 3%;
+  height: 400px;
+}
+
+@media (max-width: 1000px) {
+  #Hotel_logo {
+    display: none;
+  }
+}
