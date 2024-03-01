@@ -1,15 +1,16 @@
 import React, { Fragment, useState } from "react";
 
-const Edit = ({ todo }) => {
-  const [description, setDescription] = useState(todo.description);
- 
-  
+const Edit = ({todo,funct}) => {
+
+  const [salary, setSalary] = useState(todo.salary);
+  const [name, setName] = useState(todo.name);
+  const [email, setEmail] = useState(todo.email_id);
+  const [address, setAddress] = useState(todo.address);
+  const [role, setRole] = useState(todo.role);
   const updateDescription = async e => {
     e.preventDefault();
-    console.log(description);
-    console.log(todo.id)
     try {
-      const body = { description };
+      const body = { name,email,address,role,salary };
       const response = await fetch(
         `http://localhost:4000/datas/${todo.id}`,
         {
@@ -18,10 +19,15 @@ const Edit = ({ todo }) => {
           body: JSON.stringify(body)
         }
       );
-      console.log(response);
+      const jsonData = await response.json();
+      if(jsonData.length===0){
+        window.alert("Updated")
+      }
+      else{
+        window.alert("Email already exists")
+      }
       
-      
-    
+      funct()
     } catch (err) {
       console.error(err.message);
     }
@@ -31,41 +37,69 @@ const Edit = ({ todo }) => {
     <Fragment>
       <button
         type="button"
-        class="btn btn-warning"
+        class="btn btn-warning mx-2"
         data-toggle="modal"
-        data-target={`#id${todo.id}`}
+        data-target={`#i${todo.id}`}
+        onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);}}
       >
-        Edit
+        Edit Info
       </button>
-
-    
       <div
         class="modal"
-        id={`id${todo.id}`}
-        onClick={() => setDescription(todo.description)}
+        id={`i${todo.id}`}
+       // onClick={() => {setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);}}
       >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Salary</h4>
+              <h4 class="modal-title">Edit Info Id:{todo.id}</h4>
               <button
                 type="button"
                 class="close"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);setRole(todo.role);}}
               >
                 &times;
               </button>
             </div>
 
             <div class="modal-body">
+            <label>Name</label>
               <input
                 type="text"
                 className="form-control"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
+                value={name}
+                onChange={e => setName(e.target.value)}
               />
-              
+              <label>Role</label>
+              <input
+                type="text"
+                className="form-control"
+                value={role}
+                onChange={e => setRole(e.target.value)}
+              />
+              <label>Email</label>
+              <input
+                type="text"
+                className="form-control"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+              <label>Address</label>
+              <input
+                type="text"
+                className="form-control"
+                value={address}
+                onChange={e => setAddress(e.target.value)}
+              />
+              <label>Salary</label>
+              <input
+                type="text"
+                className="form-control"
+                value={salary}
+                onChange={e => setSalary(e.target.value)}
+              />
+            
             </div>
 
             <div class="modal-footer">
@@ -83,7 +117,7 @@ const Edit = ({ todo }) => {
                 type="button"
                 class="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);setRole(todo.role);}}
               >
                 Close
               </button>
@@ -91,9 +125,9 @@ const Edit = ({ todo }) => {
           </div>
         </div>
       </div>
+      
 
-
-      <div
+      {/*<div
         class="modal"
         id="status"
       >
@@ -106,7 +140,7 @@ const Edit = ({ todo }) => {
                 class="close"
                 data-dismiss="modal"
                 onClick={()=>{
-                  window.location='/';
+                  func()
                 }}
               >
                 &times;
@@ -125,7 +159,7 @@ const Edit = ({ todo }) => {
                 class="btn btn-danger"
                 data-dismiss="modal"
                 onClick={()=>{
-                  window.location='/';
+                  func()
                 }}
               >
                 Close
@@ -133,7 +167,7 @@ const Edit = ({ todo }) => {
             </div>
           </div>
         </div>
-      </div>
+              </div>*/}
     </Fragment>
   );
 };
