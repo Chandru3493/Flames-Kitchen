@@ -55,7 +55,7 @@ const Edit = ({todo,funct}) => {
               <h4 class="modal-title">Edit Info Id:{todo.id}</h4>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);setRole(todo.role);}}
               >
@@ -63,7 +63,7 @@ const Edit = ({todo,funct}) => {
               </button>
             </div>
 
-            <div class="modal-body">
+            <div className="modal-body">
             <label>Name</label>
               <input
                 type="text"
@@ -72,12 +72,22 @@ const Edit = ({todo,funct}) => {
                 onChange={e => setName(e.target.value)}
               />
               <label>Role</label>
-              <input
+              {/*<input
                 type="text"
                 className="form-control"
                 value={role}
                 onChange={e => setRole(e.target.value)}
-              />
+  />*/}
+              <div class="dropdown">
+  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {role}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <btn class="dropdown-item" onClick={()=>{setRole("admin")}}>admin</btn>
+    <btn class="dropdown-item" onClick={()=>{setRole("waiter")}}>waiter</btn>
+    <btn class="dropdown-item" onClick={()=>{setRole("cook")}}>cook</btn>
+  </div>
+</div>
               <label>Email</label>
               <input
                 type="text"
@@ -125,49 +135,6 @@ const Edit = ({todo,funct}) => {
           </div>
         </div>
       </div>
-      
-
-      {/*<div
-        class="modal"
-        id="status"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                onClick={()=>{
-                  func()
-                }}
-              >
-                &times;
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <h4>Salary updated successfully</h4>
-              
-            </div>
-
-            <div class="modal-footer">
-            
-              <button
-                type="button"
-                class="btn btn-danger"
-                data-dismiss="modal"
-                onClick={()=>{
-                  func()
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-              </div>*/}
     </Fragment>
   );
 };
