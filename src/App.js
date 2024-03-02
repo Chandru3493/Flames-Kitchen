@@ -1,8 +1,13 @@
+
 import React from "react";
 import "./App.css";
 import LoginForm from "./Components/LoginForm";
 import { Route, Routes } from "react-router-dom";
-import Admin from "./Components/Admin";
+import logo from './logo.svg';
+import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios';
+import Admin from './components/Admin';
 import Cook from "./Components/Cook";
 import Waiter from "./Components/Waiter"
 
@@ -16,6 +21,7 @@ function App() {
         <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter />} />
       </Routes>
     </div>
+
   );
 }
 

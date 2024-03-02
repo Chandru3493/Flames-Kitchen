@@ -1,0 +1,476 @@
+.toolbar {
+    
+    border-color: rgb(78, 78, 78);
+    border-radius: 0.25px;
+    border-style: solid;
+    width: 90%;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    height: 100vmax;
+    display: flex;
+    flex-direction: column;
+    background-color: #D7D7D7;
+    
+
+
+}
+
+.pack {
+    width: 20%;
+    
+    display: flex;
+    flex-direction: row;
+    
+
+}
+
+.backarrow {
+    background-color: #D7D7D7;
+    width: 30px;
+    padding-top: 1%;
+    border-color: #272D2F;
+    border-style: solid;
+    border-left: none;
+    height:30px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    text-align: center;
+    cursor : pointer;
+  }
+.full{
+    
+    height: 100vmax;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.buttona {
+    background-color: #FFC529; /* Yellow background */
+    color: #272D2F; /* Black text color */
+    padding: 10px 10px; /* Adjust padding as needed */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+    font-weight: bold; /* Bold text */
+  }
+  .viewfull {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+
+  
+
+  #start {
+    width: 20%;
+    margin-left: 1%;
+    
+    font-size: 70%;
+    text-align: center;
+  }
+
+  #end {
+    width: 20%;
+    margin-left: 1%;
+    font-size: 70%;
+    text-align: center;
+  }
+ 
+.element{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    border-color: rgb(78, 78, 78);
+    font-size: 80%;
+    color: rgb(78, 78, 78);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+     border-bottom-right-radius: 20%;
+     border-left: #272D2F ;
+     cursor: pointer;
+}
+
+.heading{
+    color:black;
+    text-align: center;
+    font-size: 120%;
+    
+}
+
+
+
+.page {
+    width: 75%;
+    height: 100vh;
+    
+}
+
+#day{
+    width: 5%;
+    font-size: 100%;
+}
+
+#month{
+    width: 5%;font-size: 100%;
+}
+
+#year{
+    width:20%;font-size: 100%;
+}
+
+.inp {
+border: none;
+border-bottom: 1px solid rgb(78, 78, 78);
+width: 40%;
+font: 25px sans-serif;
+
+}
+
+.inpone {
+    margin-left: 27%;
+    
+    display: block; 
+    width: 70%;
+    margin-top: 50px;
+}
+
+#fininp{
+    margin-left: 35.5%;
+
+}
+
+.bold{
+    font-weight: bold;
+    width: 30%;
+}
+
+.vissearch{
+  
+  display: flex;
+  flex-direction: row;
+}
+
+#searchemp {
+    margin-left: 5px;
+    padding: 10px;
+    font-size: 65%;
+}
+
+#searchbaremp{
+    font-size: 150%;
+}
+
+.inptext {
+    font-size: 15px;
+    color: rgb(78, 78, 78);
+    font-weight: bold;
+    font-size: 70%;
+    margin-bottom: 4px;
+    
+}
+
+#res {
+    margin-top: 50px;margin-left: 10%;font-size: 70%;
+}
+.boxy {
+    border-color: rgb(78, 78, 78);
+    border-radius: 10px;
+    border-style: solid;
+    width: 100%;
+    height: 10%;
+    
+    display: flex;
+    flex-direction: row;
+    
+    overflow-x: scroll;
+}
+
+.empdet {
+width: 70%;
+}
+
+.deti {
+    font-size: 80%;
+    padding-left: 5%;
+}
+
+.photoback {
+    width: 30%;
+    text-align: center;
+    display: grid;
+    
+}
+.photoholder {
+    text-align: center;
+   
+    height: 100%;
+    width: 100%;
+   
+    
+   
+
+}
+.empphoto{
+    
+     
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    text-align: center;margin-left: 10%;
+    margin-left: auto;
+    border-style: solid;
+    border-color: #272D2F;
+
+    
+      
+}
+.datpt{
+    
+  
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    background-color: #FE724C;
+    text-align: center;margin-left: 2%;
+    
+    border-style: solid;
+    border-color: #272D2F;
+
+    
+      
+}
+
+.datavisualiser{
+    margin-top: 3%;
+    width:100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+    
+}
+
+.chart{
+    width: 50%;
+   
+    height: 100%;
+    align-items: center;
+    overflow-y: scroll;
+}
+.infoline {
+    font-size: 80%;
+    margin: 4%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.board{
+    width: 50%;
+    height: 100%;
+    border-style: solid;
+    padding: 1%;
+    border-radius: 20px;
+    overflow-x: scroll;
+    
+}
+
+.link{
+    width: 0.1%;
+    margin-left: 15px;
+    height: 50%;
+    border-top: none;
+    border-bottom: none;
+    
+}
+
+.ddt{border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: #D7D7D7;
+    text-align: center;
+    margin-left: 2%;
+    
+    border-style: solid;
+    border-color: #272D2F;}
+.link{
+    border-style: solid;
+    border-color: #272D2F;
+    margin-left: 2.75%;
+    height: 20px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.buttonhold {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#holdd{
+  text-align: center;
+  align-self: flex-end;
+}
+.buttonhold2 {
+   
+   display: flex;
+   text-align: center;
+   flex-direction:column;
+   width: 100%;
+
+}
+#gobackemp {
+  color: #D7D7D7;
+  background-color: #FE724C;
+  width:35px;
+  height: 35px;
+  font-size: 60%;
+  border-radius: 50%;
+  padding: 10px;
+  align-self: flex-end;
+    
+}
+.empbox {
+    border-color: rgb(78, 78, 78);
+    border-radius: 10px;
+    border-style: solid;
+    width: 100%;
+   height: 10%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+
+.element:last-child {
+    margin-top: auto;
+    width: 40%;
+    align-self: center;
+    background-color: #FFC529; /* Yellow background */
+    color: black; /* Black text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+    font-weight: bold; /* Bold text */
+  }
+
+  .megbox {
+   
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: -2%;
+    
+    
+    display: block;
+   
+  }
+
+  #addemp{
+    padding: 10px;
+    width:24%;
+    font-size: 60%;
+  }
+
+  .cardtexti {
+    width: 70%;
+    
+    font-size: 70%;
+  }
+
+  .cardi {
+    background-color: #FE724C; /* Yellow background */
+    color: black; /* Black text color */
+    padding: 20px 20px; /* Adjust padding as needed */
+    border-color: #272D2F;
+    border-style: solid; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+    font-weight: bold; /* Bold text */
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    margin: 4px;
+  }
+
+  .cardphotoi {
+    font-size: 50%;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    border-style: solid;
+    border-radius: 1px;
+    border-color: black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .addbox{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    text-align: center;
+  }
+
+  #forms {
+    margin-top: 4%;
+
+    height: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    display: grid;
+    flex-direction: row;
+  }
+
+  .inptwo{
+    
+    margin-bottom: 8px;
+    display: block; 
+    width: 100%;
+    
+  }
+
+  #addbut{
+    margin-left: 3px;
+    width: 30%;
+    font-size: 60%;
+    padding: 10px;
+
+  }
+
+  #addreturn{
+    color: #D7D7D7;
+    background-color: #FE724C;
+    width:35px;
+    height: 35px;
+    font-size: 60%;
+    border-radius: 50%;
+    padding: 10px;
+    align-self: flex-end;
+  }
+
+  #addmeg {
+    text-align: center;
+    
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+
+  }
+
+
+.abovefin{
+    width: 100vmax;
+    
+   
+
+}
