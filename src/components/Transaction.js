@@ -13,7 +13,7 @@ const Transaction = (props) => {
 
         <p className='infoline'><div className='bold'>{data.type==="food order"?"Items sold":"Items bought"}</div> : </p>
         {data.items.map((item,index)=>{
-            return(<p style={{paddingLeft: "30px", fontSize: "75%"}}> {index}.{item}</p>)
+            return(<p style={{paddingLeft: "30px", fontSize: "75%"}}> {index+1}  .{item}</p>)
         })}
         <p className='infoline'><div className='bold'>Transaction sum</div>     : {data.sum}</p>
         <p className='infoline'><div className='bold'>Balance at End of Transaction</div>     : {data.curbal}</p>

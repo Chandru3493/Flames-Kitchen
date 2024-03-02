@@ -57,7 +57,7 @@ const ViewEmployee = () => {
       
 
   return (
-    <div id='viewfull'>
+    <div className='viewfull'>
       <h2 className='heading' >Employee Information search portal</h2>
       <div className="inpone">
       <p className='inptext'>Enter Employee name</p>
@@ -91,7 +91,7 @@ const ViewEmployee = () => {
         </div>
         <div className='photoback'>
           <div className='buttonhold'>
-            <input type='button' id='gobackemp' className='buttona' value="return" onClick={()=>{setView()}}/>
+            <input type='button' id='gobackemp' className='buttona' value="X" onClick={()=>{setView()}}/>
             </div></div>
 
     </div></>)}
@@ -106,8 +106,8 @@ const ViewEmployee = () => {
       add && (<>
       <div className='megbox' id="addmeg">
       <div className='empbox' id='forms'>
-      <div className="inptwo">
-      <p className='inptext'>Enter Employee name</p>
+      <div className="inptwo" id="special"><div className='buttonhold2'><input type='button' id="addreturn"  className='buttona' value="X" onClick={()=>{setAdd(false);setData({});}}/></div>
+      <p className='inptext' id='holdd'>Enter Employee name</p>
       <input name='name' value={data.name} onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
       
       <div className="inptwo">
@@ -119,8 +119,8 @@ const ViewEmployee = () => {
       <option value='cook'>cook</option>
       </select></div>
       
-      <div className="inptwo">
-        <p className='inptext'>Enter Employee address</p>
+      <div className="inptwo" >
+        <p className='inptext'>Enter Employee address</p> 
       <input value={data.address} name='address' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
       <div className="inptwo">
         <p className='inptext'>Enter Employee salary</p>
@@ -129,7 +129,7 @@ const ViewEmployee = () => {
       <input value={data.email} name='email' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}} type='text'/></div>
       <div className='inptwo'><p className='inptext'>Enter Employee password</p>
       <input value={data.password} name='password' onChange={(e)=>{setData({...data,[e.target.name] : e.target.value})}} type='password'/></div>
-     <div> <input type='button' id="addreturn"  className='buttona' value="return" onClick={()=>{setAdd(false);setData({});}}/><input type='button' id="addbut" className='buttona' value="Add employee" onClick={push}/></div>
+     <div> <input type='button' id="addbut" className='buttona' value="Add employee" onClick={push}/></div>
       </div>
       </div>
      
