@@ -7,7 +7,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-import Admin from './Components/Admin';
+import Admin from './components/Admin';
 import Cook from "./Components/Cook";
 import Waiter from "./Components/Waiter"
 import ViewEmployee from "./Components/ViewEmployee.js";
