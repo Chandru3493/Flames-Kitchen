@@ -5,7 +5,7 @@ import ViewEmployee from './ViewEmployee.js'
 import ViewFinancialReport from './ViewFinancialReport'
 import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom'
 import Input from './Input.js'
-const Admin = () => {
+const Admin = (props) => {
   const [one,setOne]= useState(true);
   const [two,setTwo]= useState(false);
   const [three,setThree]= useState(false);
@@ -35,12 +35,13 @@ const Admin = () => {
         <div className='element' onClick={()=>{setOne(false);setTwo(false);setThree(true)}}>
             View financial report
         </div>
-        <div className='element' onClick={()=>{handleLogout()}}>
-          Logout
-        </div>
+        
     </div>
     </div>
     <div className='page'>
+      <div className='nav'><div id='tex'>Hello {props.data.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
+          Logout
+        </div></div></div>
     <Routes>
           
           {one&&<Route exact path="/" element={<ViewEmployee />} ></Route>}

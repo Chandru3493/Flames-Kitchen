@@ -4,7 +4,7 @@ import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import logo from "./Logo.png";
 
-function LoginForm() {
+function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -52,8 +52,9 @@ function LoginForm() {
       const { user_id, token, user_roleId} = responseData; // Change user_role to user_id
       
       const decodedToken = jwtDecode(token);
-      console.log("user ID:", decodedToken.userId);
-      console.log("User Role:", user_roleId);
+      const names =decodedToken.userName;
+      const ids =decodedToken.userId;
+      props.fun({name: names,id: ids,role: user_roleId});
 
       if (user_roleId === 1) {
         navigate("/Fp0wLkQgHe3iMl7n4NqT");
