@@ -1,13 +1,22 @@
 import React,{ useState } from 'react'
 
 import './anuragstyles.css'
-import ViewEmployee from './ViewEmployee'
+import ViewEmployee from './ViewEmployee.js'
 import ViewFinancialReport from './ViewFinancialReport'
 import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom'
 import Input from './Input.js'
 const Admin = () => {
+  const [one,setOne]= useState(true);
+  const [two,setTwo]= useState(false);
+  const [three,setThree]= useState(false);
  const navigate = useNavigate();
-  const [toggle,setToggle] = useState(true)
+ const handleLogout = () => {
+  // Clear the token from local storage
+  localStorage.removeItem("token");
+  // Redirect to the login page
+  navigate("/");
+};
+ 
   return (
    
    <div className='full'>
@@ -17,26 +26,27 @@ const Admin = () => {
     <div className='pack'>
     
     <div className='toolbar'>
-        <div className='element' onClick={()=>{navigate("/ViewEmployee")}}>
+        <div className='element' onClick={()=>{setOne(true);setTwo(false);setThree(false)}}>
             View Staff details
         </div>
-        <div className='element' onClick={()=>{navigate("/EditEmployee")}} >
+        <div className='element' onClick={()=>{setOne(false);setTwo(true);setThree(false)}} >
             Edit Staff details
         </div>
-        <div className='element' onClick={()=>{navigate("/ViewFinancial")}}>
+        <div className='element' onClick={()=>{setOne(false);setTwo(false);setThree(true)}}>
             View financial report
         </div>
-        <div className='element'>
+        <div className='element' onClick={()=>{handleLogout()}}>
           Logout
         </div>
     </div>
     </div>
     <div className='page'>
-      <Routes>
-     <Route exact path="/ViewEmployee" element={<ViewEmployee />}/>
-     <Route exact path="/EditEmployee" element={<Input />}/>
-     <Route exact path="/ViewFinancial" element={ <ViewFinancialReport />}/>
-    </Routes></div>
+    <Routes>
+          
+          {one&&<Route exact path="/" element={<ViewEmployee />} ></Route>}
+          { two&& <Route exact path="/" element={<Input />} ></Route>}
+          { three && <Route exact path="/" element={<ViewFinancialReport />} ></Route>}</Routes>
+    </div>
     
     
     </div>
