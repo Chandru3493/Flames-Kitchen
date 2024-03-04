@@ -69,7 +69,7 @@ const CreateTask = ({ tasks, setTasks }) => {
 				<option value="Gulab Jamun" />
 				<option value="Rasmalai" />
 			</datalist>
-			<button className="bg-cyan-500 rounded-md px-4 h-12 text-white">
+			<button className="bg-orange-400 rounded-md px-4 h-12 text-white">
 				Create
 			</button>
 		</form>
