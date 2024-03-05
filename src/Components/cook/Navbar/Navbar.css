@@ -1,0 +1,35 @@
+/* Navbar.css */
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #d7d7d7; /* Greyish background */
+	padding: 10px 20px; /* Adjust padding as needed */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar-logo button {
+	background-color: transparent;
+	border: none;
+	color: #333; /* Dark grey text color */
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.navbar-links button {
+	background-color: #ffc529; /* Yellow logout button */
+	border: none;
+	padding: 8px 15px;
+	color: #333; /* Dark grey text color */
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.navbar-links button:hover {
+	background-color: #ffc529; /* Darker yellow on hover */
+}

@@ -1,4 +1,4 @@
-.toolbar {
+.tx {
     
     border-color: rgb(78, 78, 78);
     border-radius: 0.25px;
@@ -29,14 +29,16 @@
   
 }
 
-#log{
+
+
+#log {
   align-self: flex-start;
   margin-right: 2%;
 }
 
 .nav {
   width: 100%;
-  border-style: solid;
+  border-bottom-style : solid;
   padding: 1%;
   border-color: #272D2F;
   border-top: none ;
@@ -44,7 +46,7 @@
   border-left: none ;
   background-color: #D7D7D7;
 }
-.pack {
+.pac {
     width: 20%;
     
     display: flex;
@@ -66,7 +68,7 @@
     text-align: center;
     cursor : pointer;
   }
-.full{
+.ful{
     width: 100vmax;
     height: 100vmax;
     display: flex;
@@ -107,7 +109,7 @@
     text-align: center;
   }
  
-.element{
+.ex{
     border-top: 0;
     border-left: 0;
     border-right: 0;
@@ -132,7 +134,7 @@
 
 
 
-.page {
+.pag {
     width:  80%;
     height: 100vmax;
     

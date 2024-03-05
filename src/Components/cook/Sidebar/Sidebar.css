@@ -1,0 +1,70 @@
+.toolbar {
+	border-color: rgb(78, 78, 78);
+	border-radius: 0.25px;
+	border-style: solid;
+	width: 90%;
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 0px;
+	height: 100vmax;
+	display: flex;
+	flex-direction: column;
+	background-color: #d7d7d7;
+}
+
+.pack {
+	width: 25%;
+	z-index: 2;
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+}
+
+.backarrow {
+	background-color: #d7d7d7;
+	width: 30px;
+	padding-top: 1%;
+	border-color: #272d2f;
+	border-style: solid;
+	border-left: none;
+	height: 30px;
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+}
+
+.element {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-style: solid;
+	border-color: rgb(78, 78, 78);
+	font-size: 80%;
+	color: rgb(78, 78, 78);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-bottom-right-radius: 20%;
+	border-left: #272d2f;
+	cursor: pointer;
+}
+
+.heading {
+	color: black;
+	text-align: center;
+	font-size: 120%;
+}
+
+.element:last-child {
+	margin-top: auto;
+	width: 40%;
+	align-self: center;
+	background-color: #ffc529; /* Yellow background */
+	color: black; /* Black text color */
+	padding: 10px 20px; /* Adjust padding as needed */
+	border: none; /* Remove default border */
+	border-radius: 10px; /* Rounded corners */
+	cursor: pointer; /* Hand cursor on hover */
+	font-weight: bold; /* Bold text */
+}

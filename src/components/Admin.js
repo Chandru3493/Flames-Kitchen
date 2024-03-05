@@ -19,27 +19,27 @@ const Admin = (props) => {
  
   return (
    
-   <div className='full'>
+   <div className='ful'>
   
    
     
-    <div className='pack'>
+    <div className='pac'>
     
-    <div className='toolbar'>
-        <div className='element' onClick={()=>{setOne(true);setTwo(false);setThree(false)}}>
+    <div className='tx'>
+        <div className='ex' onClick={()=>{setOne(true);setTwo(false);setThree(false)}}>
             View Staff details
         </div>
-        <div className='element' onClick={()=>{setOne(false);setTwo(true);setThree(false)}} >
+        <div className='ex' onClick={()=>{setOne(false);setTwo(true);setThree(false)}} >
             Edit Staff details
         </div>
-        <div className='element' onClick={()=>{setOne(false);setTwo(false);setThree(true)}}>
+        <div className='ex' onClick={()=>{setOne(false);setTwo(false);setThree(true)}}>
             View financial report
         </div>
         
     </div>
     </div>
-    <div className='page'>
-      <div className='nav'><div id='tex'>Hello {props.data.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
+    <div className='pag'>
+      <div className='nav '><div id='tex'>Hello {props.data.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
           Logout
         </div></div></div>
     <Routes>

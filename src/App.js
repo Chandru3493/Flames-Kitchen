@@ -7,13 +7,14 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-import Admin from './components/Admin';
-import Cook from "./Components/Cook";
+import Admin from './Components/Admin';
+
 import Waiter from "./Components/Waiter"
 import ViewEmployee from "./Components/ViewEmployee.js";
 import ViewFinancialReport from "./Components/ViewFinancialReport.js";
 import Input from "./Components/Input.js";
 import { useState } from "react";
+import Complete from "./Components/cook/Complete";
 
 function App() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm fun={settle} />} />
         <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={use}/>} />
-        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Cook data={use}/>} />
+        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={use}/>} />
         <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter data={use}/>} />
         
       </Routes>
