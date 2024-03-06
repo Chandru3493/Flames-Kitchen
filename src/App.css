@@ -1,47 +1,108 @@
 body {
-  background-color: #272d2f;
+  background-color: #272d2f; 
+  background-image: url('./components/Logo.png'); 
+  background-repeat: no-repeat; 
+  background-size: 25%;
+  background-position: center; 
+  font-family: Copperplate, Papyrus, fantasy; 
 }
 
+
+
+/* Table Styles */
 .table-grid {
   padding: 20px;
   padding-left: 50px;
-  margin: 5% 0; 
+  margin: 5% 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 40px; 
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
 }
 
 .table-button {
-  width: 200px; 
+  width: 200px;
   height: 200px;
-  border-radius: 15px; 
+  border-radius: 15px;
   display: flex;
-  flex-direction: column; 
   align-items: center;
   justify-content: center;
-  text-align: center;
-  font-size: 18px; 
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer; /* Add cursor pointer to indicate interactivity */
 }
 
-/* Status Colors */
-.table-button[variant="success"] {  
-  background-color: green; 
-  color: white; 
+.table-button:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
-.table-button[variant="info"] {  
-  background-color: lightblue; 
-} 
-.table-button[variant="danger"] {  
-  background-color: red; 
-}
-.table-button[variant="warning"] {  
-  background-color: yellow; 
-} 
 
+.available {
+  background-color: green;
+}
+
+.occupied {
+  background-color: yellow;
+}
+
+.reserved {
+  background-color: cyan;
+}
+
+.out-of-service {
+  background-color: grey;
+  color: white;
+}
+
+/* Modal Styles */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  z-index: 999;
+}
+
+
+.table-details-modal {
+  font-size: 20px;
+  position: fixed;  /* Change to fixed positioning */
+  top: 50%;   /* Set top position to 50% */
+  left: 50%;   /* Set left position to 50% */
+  transform: translate(-50%, -50%); /* Center the modal using translate */
+   /* Adjust the width as needed */
+  max-width: 600px; /* Limit the maximum width if desired */
+  z-index: 1001;
+}
+
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black; /* White text on yellow background */
+  background-color: #ffc529;
+  border: none; /* Remove the default border */
+  padding: 5px 8px; /* Adjust padding slightly */
+  border-radius: 50%; /* Make it a circle */
+  z-index: 1002;
+}
+
+/* Replace the tomato color with an empty string to remove the default icon */
+.btn-close::before {
+  content: '\f060'; /* Font Awesome left arrow */
+  font-family: "Font Awesome 6 Free"; 
+  font-weight: 900; 
+}
+
+
+/* General Layout Styles */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Use min-height instead of height */
+  min-height: 100vh;
 }
 
 .content-wrapper {
@@ -51,36 +112,33 @@ body {
 
 .side-area {
   padding: 10px;
-  display: flex; /* Use flexbox to arrange the sidebar and notifications board */
-  flex-direction: column; /* Arrange them vertically */
-  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.sidebar,
 .notifications-board {
-  background-color: #ffc529;
+  background-color:  #fe724c;
+  color:#272d2f;
   padding: 20px;
   border: 1px solid lightgray;
-  border-radius: 5%;
-  flex: 1; /* Take up equal space within the side area */
-  margin: 10px; /* Add margin as needed */
+  border-radius: 5px;
+  margin: 10px;
 }
 
-
 .restaurant-name {
-  font-family: Copperplate, Papyrus, fantasy;
   color: #fe724c;
-  font-size: 30px;
+  font-size: 40px;
   padding-left: 5%;
-  font-weight: bold;
-  font-stretch: extra-expanded;
+  font-weight: bolder;
+  font-stretch: ultra-expanded;
 }
 
 .welcome-message {
+  color: #fe724c;
   padding-left: 5%;
   font-size: 30px;
-  color: #d7d7d7;
-  font-family: luminari, fantasy;
+  font-weight: bolder;
 }
 
 /* Status Colors */
@@ -100,3 +158,217 @@ body {
   background-color: yellow;
 }
 
+.popup-container {
+  align-items: center;
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to bottom, #ffffff, #f2f2f2); /* Gradient background */
+  width: 300px;
+  border-radius: 20px; /* Rounded borders */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Box shadow */
+  padding: 50px;
+  z-index: 1002;
+  align-items: center;
+  position: center;
+}
+
+.popup-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.popup-content {
+  margin-bottom: 20px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-button-close {
+  background-color: #ff5c5c; /* Red color for close button */
+  color: white;
+}
+
+.popup-button-action {
+  background-color: #5c9aff; /* Blue color for action button */
+  color: white;
+}
+
+.order-taking-popup{
+  position: relative;
+  z-index: 1005;
+}
+/* Modal Styles */
+.order-taking-popup .modal-dialog {
+  position: fixed; /* Change to fixed positioning */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  width: 80%;
+  height: 100%; 
+  max-width: 1500px; 
+  max-height: 750px; 
+  margin: 0; /* Remove any default margins */
+}
+
+.order-taking-popup .modal-content {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px; 
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.order-taking-popup .modal-header {
+  background-color: #f0f0f0; 
+  border-bottom: 1px solid #ddd;
+  padding: 15px; 
+}
+
+.order-taking-popup .modal-title {
+  font-weight: bold;
+  color: #333; 
+}
+
+.order-taking-popup .modal-body {
+  padding: 20px;
+}
+
+/* order-taking-container */
+.order-taking-container {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+  padding: 20px; 
+  border: 1px solid #ddd; /* Add a border */
+  border-radius: 5px; 
+}
+
+/* category-menu */
+.category-menu {
+  flex: 1; 
+  margin-right: 20px; 
+}
+
+.category-menu button {
+  background-color: #eee; 
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.category-menu button.active {
+  background-color: #5c9aff; 
+  color: white; 
+}
+
+/* menu-items-list */
+.menu-items-list {
+  flex: 2; 
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 10px; 
+  border-radius: 10px; 
+}
+
+.menu-item-name {
+  font-weight: bold;
+  flex: 1;
+  padding-right: 10px;
+}
+
+.menu-item .price {
+  flex: 1; /* Add a new class `price` and set its flex value to 1 */
+  text-align: left;
+  padding-right: 20px; /* Align the text to the right */
+  margin-right: 10px;
+}
+
+
+.menu-item button { /* Add to Cart Button */
+  background-color: #5c9aff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* order-summary */
+.order-summary {
+  background-color: #f5f5f5;
+  flex: 1; 
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px; 
+}
+
+.order-summary table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+.order-summary th, 
+.order-summary td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.place-order-button {
+  background-color: #4CAF50; /* Change the background color to green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.menu-navigation {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 10px; 
+}
+
+.menu-item input[type="number"] {
+  width: 50px; 
+  margin-left: 10px;
+  text-align: center;
+}
+
+/* Table Number Display */
+
+.table-number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none; 
+}
+
+.table-details-modal .modal-header{
+  z-index: 1001;
+  position: relative;
+}

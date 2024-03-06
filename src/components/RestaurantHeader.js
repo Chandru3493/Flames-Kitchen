@@ -9,7 +9,7 @@ function RestaurantHeader() {
         <h1>Flames Kitchen</h1> 
       </div>
       <div className="welcome-message">
-        Welcome {waiterName}!
+        WAITER'S DASHBOARD
       </div> 
     </header>
   );
