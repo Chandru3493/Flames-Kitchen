@@ -60,10 +60,20 @@ const al1 = async()=>{
       setData(jsonData);
       setData1(jsonData);
 }
+
+const prev1 = async()=>{
+  const response = await fetch(`http://localhost:4000/prevdatas`,{
+    method: "GET"
+});
+const jsonData = await response.json();
+setData(jsonData);
+setData1(jsonData);
+}
 useEffect(()=>{
   al1()
 },[]
 )
+
 const work =()=>{
   if (func===1){
     w1()
@@ -75,6 +85,8 @@ const work =()=>{
     al1()
   }else if(func===0){
     d1()
+  }else if(func===5){
+    prev1()
   }
 } 
   const onSubmitForm = async e => {
@@ -137,6 +149,13 @@ const work =()=>{
   setFunc(4);  
   
     }}>All Employees</btn>
+    <btn className="dropdown-item"
+    onClick={()=>{
+      
+    prev1();
+    setFunc(5);  
+  
+    }}>Prev Employees</btn>
     </div>
     </div>
     </div>
@@ -148,7 +167,7 @@ const work =()=>{
       {" "}
       <table class="table table-hover table-bordered border-primary mt-5 text-center">
         <thead>
-          <tr>
+          <tr className="table-warning">
             <th>Name</th>
             <th>Role</th>
             <th>Email</th>
@@ -168,7 +187,17 @@ const work =()=>{
               <td>{d.address}</td>
               <td>{d.salary}</td>
               <td>
-                <Edit todo={d} funct={work}/>  
+              {func===5 ? (
+                <btn className="btn btn-warning" onClick={async()=>{
+                  const restore = await fetch(`http://localhost:4000/restore/${d.id}`,
+                    {
+                      method:"PUT",
+                      headers: { "Content-Type": "application/json" }
+                    })
+                    work()
+                }}>Restore</btn>
+                ):<Edit todo={d} funct={work}/>}
+                  
               </td>
             </tr>
           ))}
