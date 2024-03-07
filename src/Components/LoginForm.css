@@ -10,7 +10,18 @@
   background-position: center;
 }
 
+#email{
+  margin-left: 12%;
+  width: 60%;
+}
+
+#password{
+  margin-left: 5.5%;
+  width: 60%;
+}
+
 .login-container {
+  width: 40%;
   padding: 30px 50px;
   background-color: white;
   border-radius: 20px;
@@ -33,6 +44,7 @@
 
 .input-group {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .input-group label {
@@ -45,6 +57,15 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+}
+
+#emailab{
+  margin-top: 3%;
+}
+
+
+#passlab{
+  margin-top: 3%;
 }
 
 .error {
@@ -71,17 +92,55 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
+  #email{
+    margin-left: 11% ;
+  }
   .login-form {
+    width: 80%;
+  }
+
+  .login-container{
     width: 80%;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1024px) {
+  #email{
+    margin-left: 15%;
+  }
   .login-form {
+    width: 60%;
+  }
+
+  .login-container{
+    width: 60%;
+  }
+}
+
+
+
+@media screen and (max-width: 576px) {
+
+  #email{
+    margin-left: 17%;
+  }
+  .login-form {
+    width: 90%;
+  }
+  .login-container{
     width: 90%;
   }
 }
 
+
+@media screen and (max-width: 273px) {
+  .login-form {
+    width: 95%;
+  }
+  .login-container{
+    width: 95%;
+  }
+}
 .alert {
   background-color: #f8d7da;
   color: #721c24;

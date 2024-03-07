@@ -79,7 +79,7 @@ function LoginForm(props) {
           </center>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label htmlFor="email">Email</label>
+              <label id="emailab" htmlFor="email">Email</label>
               <input
                 type="text"
                 id="email"
@@ -92,7 +92,7 @@ function LoginForm(props) {
               {errors.email && <span className="error">{errors.email}</span>}
             </div>
             <div className="input-group">
-              <label htmlFor="password">Password</label>
+              <label id="passlab" htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
