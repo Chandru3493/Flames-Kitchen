@@ -18,9 +18,18 @@ import Complete from "./Components/cook/Complete";
 
 function App() {
   const navigate = useNavigate();
+  const [css,setCss]= useState(false);
    const [use,setUse] = useState();
    const settle=(cust)=>{
      setUse(cust)
+     setCss(true)
+   }
+
+   const x=()=>{
+    
+    setCss(false);
+    
+
    }
 
   return (
@@ -28,9 +37,9 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LoginForm fun={settle} />} />
-        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={use}/>} />
-        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={use}/>} />
-        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter data={use}/>} />
+        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={{use}}/>} />
+        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={{use,css,x}}/>} />
+        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter data={{use}}/>} />
         
       </Routes>
       

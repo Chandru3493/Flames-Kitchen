@@ -61,7 +61,7 @@ const ViewEmployee = () => {
       <h2 className='heading' >Employee Information search portal</h2>
       <div className="inpone">
       <p className='inptext'>Enter Employee name</p>
-    <input className='buttona' id='addemp' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='buttona' id='searchemp' disabled={add} onClick={handlesearch} value="Search"/>
+    <input type="button" className='buttona' id='addemp' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='buttona' type="button" id='searchemp' disabled={add} onClick={handlesearch} value="Search"/>
       
     </div>
     {found && <div className='megbox'>

@@ -39,7 +39,7 @@ const Admin = (props) => {
     </div>
     </div>
     <div className='pag'>
-      <div className='nav '><div id='tex'>Hello {props.data.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
+      <div className='nav'><div id='tex'>Hello {props.data.use.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
           Logout
         </div></div></div>
     <Routes>
