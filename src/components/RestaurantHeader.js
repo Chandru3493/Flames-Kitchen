@@ -1,4 +1,5 @@
 import React from 'react';
+import '../waiter.css';
 
 function RestaurantHeader() {
   const waiterName = "John"; // Get actual waiter name dynamically 

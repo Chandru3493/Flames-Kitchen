@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import CategoryMenu from './CategoryMenu';
 import MenuItems from './MenuItems';
 import OrderSummary from './OrderSummary';
 import axios from 'axios';
-import '../App.css'; 
+import '../waiter.css'; 
 
 function OrderTakingPopup({ show, onClose, tableNumber }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -13,28 +12,17 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
   const [cartItems, setCartItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [orderStatus, setOrderStatus] = useState('Waiting for Order');
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const itemsPerPage = 10; 
-
-  // Fetch all menu items on initial load
-  useEffect(() => {
-    const fetchAllItems = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/menu-items');
-        setMenuItems(response.data);
-      } catch (error) {
-        console.error('Error fetching all menu items:', error);
-      }
-    };
-    fetchAllItems();
-  }, []);
 
   // Fetch items for a specific category
   useEffect(() => {
     const fetchMenuItems = async (category = 'All') => {
       try {
         const endpoint = category === 'All'
-          ? 'http://localhost:3001/api/menu-items'
-          : `http://localhost:3001/api/menu-items/category/${category}`;
+          ? 'http://localhost:3002/api/menu-items'
+          : `http://localhost:3002/api/menu-items/${category}`;
 
         const response = await axios.get(endpoint);
         setMenuItems(response.data);
@@ -45,7 +33,42 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
 
     fetchMenuItems(selectedCategory); 
   }, [selectedCategory]); 
-  
+
+
+  useEffect(() => {
+    const fetchOpenOrders = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3002/api/orders/table/${tableNumber}`); 
+        const existingOrders = response.data;
+        console.log('Existing Orders:', existingOrders);
+
+        if (existingOrders) {
+          const activeOrder = existingOrders; 
+    
+          // Adjust items mapping 
+          const items = activeOrder.orderitems.map(orderitem => ({
+            id: orderitem.menu_item_id, 
+            name: orderitem.name, 
+            price: orderitem.price,
+            quantity: orderitem.quantity
+          }));
+    
+          setOrderDetails(activeOrder); // Update with the active order
+          setOrderId(activeOrder.id);
+          setCartItems(items); 
+          setOrderStatus(activeOrder.status);
+        } 
+    
+        }
+       catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    // Fetch orders when the component mounts and when tableNumber changes
+    if (show) fetchOpenOrders(); 
+  }, [show, tableNumber]); 
+
 
   const filterMenuItems = (category) => {
     return category === 'All' 
@@ -62,38 +85,59 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
     } else {
       setCartItems([...cartItems, { ...menuItem, quantity: 1 }]);
     }
-    setOrderStatus('Order Placed');
   };
 
-  const handleClose = () => {
-    setCartItems([]); // Clear the cart when the modal closes
-    onClose(); // Assuming you meant to call the provided onClose
-  };
+  const calculateTotal = (cartItems) => {
+    console.log('cartItems in calculateTotal:', cartItems); // Check content of cartItems
+    let total = 0;
+    if (cartItems) {
+        cartItems.forEach((item) => {
+            total += item.price * item.quantity;
+            console.log('item.price:', item.price, 'item.quantity:', item.quantity); // Check values during calculation
+        });
+    }
 
+    console.log('Calculated total:', total); 
+    return total;
+};
   const handlePlaceOrder = async () => { 
     try {
-      const newOrderResponse = await axios.post('http://localhost:3001/api/orders', {
-        // ... (tableId, waiterId, etc)
+      // 1. Create the order on the backend
+      const newOrderResponse = await axios.post('http://localhost:3002/api/orders', {
+        table_id: tableNumber, // Pass in the table number
+        waiter_id: 1, // replace with actual waiter ID
+        status: 'Order Placed', // Initial status
+        total_amount: calculateTotal(cartItems), // Calculate the total amount
+        order_time: new Date().toISOString() // Current time
       });
-      const orderId = newOrderResponse.data.id;
+      const order_id = newOrderResponse.data.id;
+      setOrderStatus('Order Placed');
 
+      // 2. Create order items on the backend
       const orderItemPromises = cartItems.map((item) =>
-        axios.post('http://localhost:3001/api/order-items', {
-          orderId,
-          menuItemId: item.id,
+        axios.post('http://localhost:3002/api/order-items', {
+          order_id,
+          menu_item_id: item.id,
+          cook_id: 1, // replace with actual cook ID
+          status: 'todo',
+          price: item.price,
           quantity: item.quantity,
         })
       );
-      await Promise.all(orderItemPromises);
+      await Promise.all(orderItemPromises); // Wait for creation
 
-      console.log('Order created:', newOrderResponse.data);
-      setCartItems([]); 
-      handleClose(); // Close modal after successful order
-      setOrderStatus('Order Delivered'); 
+
+      const orderResponse = await axios.get(`http://localhost:3002/api/orders/${order_id}`);
+      setOrderDetails(orderResponse.data);                   
+       // Set order status and clear the cart
+      setOrderId(order_id); 
+      setOrderStatus('Order Placed'); 
     } catch (error) {
       console.error('Error creating order:', error);
     }
   };
+
+
 
   const removeFromCart = (menuItem) => {
     setCartItems(cartItems.filter((item) => item.id !== menuItem.id));
@@ -116,36 +160,16 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
     setCartItems(cartItems.map((item) => (item.id === menuItem.id ? { ...item, quantity: newQuantity } : item)));
   };
 
-  const submitOrder = async () => {
+  const handleCloseOrder = async () => { 
     try {
-      // 1. Create the order on the backend
-      const newOrderResponse = await axios.post('http://localhost:3001/api/orders', {
-        // ... (tableId, waiterId, etc)
-      });
-      const orderId = newOrderResponse.data.id;
-
-      // 2. Create order items on the backend
-      const orderItemPromises = cartItems.map((item) =>
-        axios.post('http://localhost:3001/api/order-items', {
-          orderId,
-          menuItemId: item.id,
-          quantity: item.quantity,
-        })
-      );
-      await Promise.all(orderItemPromises); // Wait for creation
-
-      // 3. Handle success (Clear cart, close modal, etc.)
-      console.log('Order created:', newOrderResponse.data);
+      await axios.put(`http://localhost:3002/api/orders/${orderId}/status`, { status: 'Order Closed' });
+      setOrderStatus('Order Closed');
       setCartItems([]);
-      onClose();
-      setOrderStatus('Order Delivered');
     } catch (error) {
-      console.error('Error creating order:', error);
+      console.error('Error closing order:', error);
     }
   };
-
   
-
   return (
     <Modal show={show} onHide={onClose} centered className="order-taking-popup">
       <Modal.Header closeButton>
@@ -157,7 +181,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
   
         <div className="order-taking-container">
          <CategoryMenu 
-              categories={["Starter", "Main Course","Lunch", "Chinese", "Arabian", "Dessert", "Drinks", "All"]}
+              categories={["starter","main course", "dessert",  "All"]}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryClick}
           />
@@ -170,6 +194,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
                   menuItem={menuItem}
                   onAddToCart={addToCart}
                   onQuantityChange={handleQuantityChange}
+                  orderStatus={orderStatus}
                 />
               ))}
             <div className="menu-navigation">
@@ -179,13 +204,16 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
           </div>
           <OrderSummary 
          cartItems={cartItems} 
+         setCartItems={setCartItems}
          onRemoveFromCart={removeFromCart} 
          onQuantityChange={handleQuantityChange} 
          onPlaceOrder={handlePlaceOrder} 
-         orderStatus={orderStatus}/>
-          {orderStatus === 'Order Delivered' && (
-            <button onClick={addToCart}>Add Items</button>
-          )} 
+         orderStatus={orderStatus}
+         setOrderStatus={setOrderStatus}
+         handleCloseOrder={handleCloseOrder}
+         orderDetails={orderDetails}
+         orderId={orderId}
+         />
         </div>
       </Modal.Body>
     </Modal>

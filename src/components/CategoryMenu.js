@@ -1,6 +1,6 @@
 
 import React from 'react';
-import '../App.css'; 
+import '../waiter.css'; 
 
 function CategoryMenu({ categories, selectedCategory, onCategoryChange }) {
   return (

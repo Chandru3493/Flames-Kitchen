@@ -1,8 +1,8 @@
 // App.js
 import React, { useState } from 'react';
-import './App.css'; // Import your styles
+import './waiter.css'; 
 import RestaurantHeader from './components/RestaurantHeader';
-import TableArea from './components/TableArea'; // Import the SidebarPopup component
+import TableArea from './components/TableArea'; 
 import NotificationsBoard from './components/NotificationsBoard';
 import TableDetailsPopup from './components/TableDetailsPopup';
 
@@ -16,6 +16,7 @@ function App() {
   };
 
   const handleClosePopup = () => {
+    setSelectedTable(null);
     setIsTableDetailsVisible(false);
   };
 

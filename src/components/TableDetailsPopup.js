@@ -1,40 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import OrderTakingPopup from './OrderTakingPopup';
 
 function TableDetails({ selectedTable, onClose }) {
-  const [status, setStatus] = useState(selectedTable ? selectedTable[0].status : 'Available');
-  const [occupancy, setOccupancy] = useState(selectedTable ? selectedTable[0].capacity : 0);
+  console.log('Table Details - selectedTable:', selectedTable); 
+
+  console.log('selectedTable:', selectedTable);
+  const [status, setStatus] = useState('Available'); 
+  const [occupancy, setOccupancy] = useState(0);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
   useEffect(() => {
     if (selectedTable) {
-      setStatus(selectedTable?.[0].status);
-      setOccupancy(selectedTable?.[0].capacity);
+      setStatus(selectedTable.status || 'Available'); // Handle potential undefined status
+      setOccupancy(selectedTable.capacity || 0); // Handle potential undefined capacity 
+    } else {
+      // Reset to defaults when no table is selected
+      setStatus('Available');
+      setOccupancy(0);
     }
   }, [selectedTable]);
 
   const handleStatusChange = async (newStatus) => {
     setStatus(newStatus);
     try {
-      await axios.put(`http://localhost:3001/api/tables/${selectedTable[0].id}`, { status: newStatus });
-      console.log('Table status updated');
+      //console.log('Updating table with ID:', selectedTable.id); 
+
+      await axios.put(`http://localhost:3002/api/tables/${selectedTable?.id}`, { status: newStatus });
+      //console.log('Table status updated');
     } catch (error) {
       console.error('Error updating table status:', error);
     }
   };
 
   const handleOccupancyChange = async (newOccupancy) => {
-    setOccupancy(newOccupancy);
+    setOccupancy(newOccupancy); 
+  
     try {
-      await axios.put(`http://localhost:3001/api/tables/${selectedTable[0].id}`, { capacity: newOccupancy });
+      await axios.put(`http://localhost:3002/api/tables/${selectedTable?.id}`, { capacity: newOccupancy });
       console.log('Table occupancy updated');
     } catch (error) {
       console.error('Error updating table occupancy:', error);
     }
   };
+  
 
   const handleTakeOrder = () => {
     setIsOrderModalOpen(true); // Open the order modal
@@ -42,8 +52,11 @@ function TableDetails({ selectedTable, onClose }) {
   };
 
   const handleCloseOrderPopup = () => {
-    setIsOrderModalOpen(false); // Close the order modal
-    onClose();
+    console.log('handleCloseOrderPopup called, current isTableDetailsVisible:', isOrderModalOpen); // Check current visibility state
+    setIsOrderModalOpen(false);  
+    console.log('State updated, new isTableDetailsVisible:', isOrderModalOpen); // Check updated visibility state
+    onClose(); 
+    console.log('onClose from parent component called'); // Check if the parent's handler is called
   };
 
   return (
@@ -51,10 +64,10 @@ function TableDetails({ selectedTable, onClose }) {
       {selectedTable && (
         <div className="popup-container">
           <div className="popup-content">
-            <p>Table ID: {selectedTable[0].id}</p>
+            <p>Table ID: {selectedTable?.id}</p>
             <p>
               Occupancy:
-              <select value={occupancy} onChange={(e) => handleOccupancyChange(parseInt(e.target.value))}>
+              <select value={occupancy} onChange={(e) => handleOccupancyChange(e.target.value)}>
                 {[...Array(11).keys()].map(num => (
                   <option key={num} value={num}>{num}</option>
                 ))}
@@ -81,18 +94,28 @@ function TableDetails({ selectedTable, onClose }) {
       <OrderTakingPopup 
       show={isOrderModalOpen} 
       onClose={handleCloseOrderPopup}
-      tableNumber ={selectedTable[0].id} />
+      tableNumber ={selectedTable?.id} />
     </div>
   );
 }
 
 function TableDetailsPopup({ selectedTable, onClose }) {
+  console.log('TableDetailsPopup rendered, selectedTable:', selectedTable); 
   return (
     <>
-      {selectedTable && <div className="backdrop" onClick={onClose}></div>}
+      {selectedTable && (
+        <div className="backdrop" onClick={() => {
+          console.log('Backdrop clicked');
+          onClose();
+        }}>
+      </div>
+      )}
       <Modal
         show={selectedTable !== null}
-        onHide={onClose}
+        onHide={() => {
+          console.log('Modal onHide triggered')
+          onClose();
+          }}
         centered
         dialogClassName="table-details-modal"
       >
@@ -104,7 +127,6 @@ function TableDetailsPopup({ selectedTable, onClose }) {
         <Modal.Body>
           <TableDetails selectedTable={selectedTable} onClose={onClose} />
         </Modal.Body>
-        {/* No footer needed */}
       </Modal>
     </>
   );
