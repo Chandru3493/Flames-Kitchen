@@ -2,19 +2,27 @@ import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 import axios from "axios";
+import socketIOClient from 'socket.io-client';
 
-const ListTasks = ({ tasks, setTasks }) => {
+const ListTasks = ({ tasks, setTasks,user }) => {
 	const [todos, setTodos] = useState([]);
 	const [inProgress, setInProgress] = useState([]);
 	const [closed, setClosed] = useState([]);
-
+	
 	useEffect(() => {
-		// Fetch tasks from the backend
+		const sock = socketIOClient('http://localhost:4000');
+	sock.on('update', () => {
+		console.log('this is socket');
+		fetchTasks();
+	  });
 		fetchTasks();
 	}, []);
 
+	
+
 	const fetchTasks = async () => {
 		try {
+			
 			const response = await axios.get("http://localhost:4000/orderItems");
 			const fetchedTasks = response.data;
 			// console.log("Response: ", response.data);
@@ -22,7 +30,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 			console.log("Ftodos: ", ftodos);
 			console.log("Response: ", response.data);
 			const fInProgress = fetchedTasks.filter(
-				(task) => task.status === "inprogress"
+				(task) => (task.status === "inprogress" && task.cook_id===user.id)
 			);
 			console.log("FinProgress: ", fInProgress);
 			const fClosed = fetchedTasks.filter((task) => task.status === "closed");
@@ -41,6 +49,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 			<div className="flex gap-16">
 				{["todo", "inprogress", "closed"].map((status, index) => (
 					<Section
+					    use = {user}
 						key={index}
 						status={status}
 						tasks={tasks}
@@ -57,6 +66,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 };
 
 const Section = ({
+	use,
 	status,
 	tasks,
 	setTasks,
@@ -108,10 +118,11 @@ const Section = ({
 	}
 
 	const addItemToSection = async (id) => {
+		const cookid=use.id;
 		try {
 			const response = await axios.put(
 				`http://localhost:4000/orderItems/${id}`,
-				{ status }
+				{ status,cookid }
 			);
 			if (response.status === 200) {
 				toast("Task status changed successfully.", { icon: "😲" });

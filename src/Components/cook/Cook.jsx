@@ -6,7 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import CreateTask from "./CreateTask.jsx";
 import ListTasks from "./ListTasks.jsx";
 
-export default function Cook() {
+export default function Cook(props) {
 	const [tasks, setTasks] = useState([]);
 
 	// console.log("tasks", tasks);
@@ -27,7 +27,7 @@ export default function Cook() {
 			<Toaster />
 			<div className="bg-slate-100 w-screen h-screen flex flex-col items-center p-3 gap-16 pt-10">
 				<CreateTask tasks={tasks} setTasks={setTasks} />
-				<ListTasks tasks={tasks} setTasks={setTasks} />
+				<ListTasks user={props.d} tasks={tasks} setTasks={setTasks} />
 				<button className="bg-green-500 rounded-md px-4 h-12 text-white">
 					Generate Bill =
 				</button>
