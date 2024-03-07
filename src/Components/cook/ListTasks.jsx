@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 import axios from "axios";
-import socketIOClient from 'socket.io-client';
+// import socketIOClient from 'socket.io-client';
 
 const ListTasks = ({ tasks, setTasks,user }) => {
 	const [todos, setTodos] = useState([]);
@@ -10,11 +10,11 @@ const ListTasks = ({ tasks, setTasks,user }) => {
 	const [closed, setClosed] = useState([]);
 	
 	useEffect(() => {
-		const sock = socketIOClient('http://localhost:4000');
-	sock.on('update', () => {
-		console.log('this is socket');
-		fetchTasks();
-	  });
+	// 	const sock = socketIOClient('http://localhost:4000');
+	// sock.on('update', () => {
+	// 	console.log('this is socket');
+	// 	fetchTasks();
+	//   });
 		fetchTasks();
 	}, []);
 
