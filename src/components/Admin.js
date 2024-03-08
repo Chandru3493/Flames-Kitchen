@@ -17,11 +17,21 @@ const Admin = (props) => {
   navigate("/");
 };
  
-  return (
-   
+  return (<>
+    <div className='nav'>
+      <div id="fir">
+      <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
+        
+        <div id='tex'><div id='usern'>Hello {props.data.use.name}</div>
+                             <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
+    Logout</div>
+        </div>
+        
+  </div>
+  
    <div className='ful'>
   
-   
+  
     
     <div className='pac'>
     
@@ -39,9 +49,7 @@ const Admin = (props) => {
     </div>
     </div>
     <div className='pag'>
-      <div className='nav'><div id='tex'>Hello {props.data.use.name}</div><div id="fir"><div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
-          Logout
-        </div></div></div>
+      
     <Routes>
           
           {one&&<Route exact path="/" element={<ViewEmployee />} ></Route>}
@@ -51,6 +59,7 @@ const Admin = (props) => {
     
     
     </div>
+    </>
     
   )
 }
