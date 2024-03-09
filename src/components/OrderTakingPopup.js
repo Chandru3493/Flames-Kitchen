@@ -4,9 +4,12 @@ import CategoryMenu from './CategoryMenu';
 import MenuItems from './MenuItems';
 import OrderSummary from './OrderSummary';
 import axios from 'axios';
-import '../waiter.css'; 
 
-function OrderTakingPopup({ show, onClose, tableNumber }) {
+
+function OrderTakingPopup({ show, onClose, tableNumber,data }) {
+  if (data && data ? data : true) {
+    import('../waiter.css');
+ }
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [menuItems, setMenuItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
@@ -181,6 +184,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
   
         <div className="order-taking-container">
          <CategoryMenu 
+              data={data}
               categories={["starter","main course", "dessert",  "All"]}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryClick}
@@ -190,6 +194,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
               .slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage)
               .map((menuItem) => (
                 <MenuItems
+                data={data}
                   key={menuItem.id}
                   menuItem={menuItem}
                   onAddToCart={addToCart}
@@ -203,6 +208,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
             </div>
           </div>
           <OrderSummary 
+          data={data}
          cartItems={cartItems} 
          setCartItems={setCartItems}
          onRemoveFromCart={removeFromCart} 

@@ -1,7 +1,10 @@
 import React from 'react'
-import './anuragstyles.css'
+
 
 const Card = (props) => {
+  if (props.data && props.data.adcss ? props.data.adcss : true) {
+    import('./anuragstyles.css');
+  }
   const datum = props.input
   return(
     <div className='cardi' onClick={()=>{props.fun(datum)}}>

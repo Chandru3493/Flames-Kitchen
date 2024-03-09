@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 
-import './anuragstyles.css'
+
 import ViewEmployee from './ViewEmployee.js'
 import ViewFinancialReport from './ViewFinancialReport'
 import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom'
@@ -11,11 +11,15 @@ const Admin = (props) => {
   const [three,setThree]= useState(false);
  const navigate = useNavigate();
  const handleLogout = () => {
-  // Clear the token from local storage
   localStorage.removeItem("token");
-  // Redirect to the login page
+  props.data.x();
   navigate("/");
+  window.location.reload();
 };
+
+if (props.data && props.data.adcss ? props.data.adcss : true) {
+  import('./anuragstyles.css');
+}
  
   return (<>
     <div className='nav'>
@@ -52,9 +56,9 @@ const Admin = (props) => {
       
     <Routes>
           
-          {one&&<Route exact path="/" element={<ViewEmployee />} ></Route>}
-          { two&& <Route exact path="/" element={<Input />} ></Route>}
-          { three && <Route exact path="/" element={<ViewFinancialReport />} ></Route>}</Routes>
+          {one&&<Route exact path="/" element={<ViewEmployee data={props.data.adcss}/>} ></Route>}
+          { two&& <Route exact path="/" element={<Input data={props.data.adcss}/>} ></Route>}
+          { three && <Route exact path="/" element={<ViewFinancialReport data={props.data.adcss}/>} ></Route>}</Routes>
     </div>
     
     

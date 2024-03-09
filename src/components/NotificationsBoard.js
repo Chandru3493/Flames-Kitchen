@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../waiter.css';
 
-function NotificationsBoard() {
+
+function NotificationsBoard(props) {
+  if (props.data && props.data ? props.data : true) {
+    import('../waiter.css');
+ }
   const [notifications, setNotifications] = useState([]);
   const [currentOrderId, setCurrentOrderId] = useState(null);
 

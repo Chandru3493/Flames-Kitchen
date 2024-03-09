@@ -1,7 +1,10 @@
 import React from 'react';
-import "../waiter.css";
 
-function MenuItem({ menuItem, onAddToCart }) {
+
+function MenuItem({ menuItem, onAddToCart,data }) {
+  if (data && data ? data : true) {
+    import('../waiter.css');
+ }
   return (
     <div className="menu-item">
       <div className="menu-item-name">{menuItem.name}</div>

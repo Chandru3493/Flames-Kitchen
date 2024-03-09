@@ -3,7 +3,8 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import OrderTakingPopup from './OrderTakingPopup';
 
-function TableDetails({ selectedTable, onClose }) {
+function TableDetails({ selectedTable, onClose,data }) {
+  
   console.log('Table Details - selectedTable:', selectedTable); 
 
   console.log('selectedTable:', selectedTable);
@@ -92,6 +93,7 @@ function TableDetails({ selectedTable, onClose }) {
         </div>
       )}
       <OrderTakingPopup 
+      data={data}
       show={isOrderModalOpen} 
       onClose={handleCloseOrderPopup}
       tableNumber ={selectedTable?.id} />

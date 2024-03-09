@@ -21,15 +21,25 @@ import Waitercom from "./Components/Waitercom.js";
 function App() {
   const navigate = useNavigate();
   const [css,setCss]= useState(false);
+  const [adcss,setadCss]=useState(false);
+  const [wtcss,setWtCss]=useState(false);
    const [use,setUse] = useState();
    const settle=(cust)=>{
      setUse(cust)
-     setCss(true)
+     if(cust.role===1){
+      setadCss(true);
+     }else if(cust.role===1){
+      setCss(true);
+     }else{
+      setWtCss(true);
+     }
    }
 
    const x=()=>{
     
     setCss(false);
+    setadCss(false);
+    setWtCss(false);
     
 
    }
@@ -39,9 +49,9 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LoginForm fun={settle} />} />
-        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={{use}}/>} />
+        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={{use,adcss,x}}/>} />
         <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={{use,css,x}}/>} />
-        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waitercom data={{use}}/>} />
+        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waitercom data={{use,wtcss,x}}/>} />
         
       </Routes>
       

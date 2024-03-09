@@ -1,5 +1,5 @@
 import React from 'react'
-import './anuragstyles.css'
+
 
 import { useState,useEffect } from 'react'
 import Card from './Card'
@@ -8,14 +8,16 @@ import config from './terms';
 
 
 
-const ViewEmployee = () => {
+const ViewEmployee = (props) => {
     
     const [view,setView] = useState();
     const [add,setAdd]=useState(false);
     const [data,setData]=useState({role: 'admin'});
     
      
-    
+    if (props.data && props.data ? props.data : true) {
+      import('./anuragstyles.css');
+    }
 
     
     const [inp,setInp]= useState("")
@@ -70,7 +72,7 @@ const ViewEmployee = () => {
       
         {found.map((datum,index)=>(
           
-          <Card key={index} input={datum} fun ={p}/>
+          <Card data={props.data} key={index} input={datum} fun ={p}/>
         ))}
     </div></>}
 

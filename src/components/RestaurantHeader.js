@@ -1,9 +1,11 @@
 import React from 'react';
-import '../waiter.css';
 
-function RestaurantHeader() {
+
+function RestaurantHeader(props) {
   const waiterName = "John"; // Get actual waiter name dynamically 
-
+  if (props.data && props.data.wtcss ? props.data.wtcss : true) {
+    import('../waiter.css');
+ }
   return (
     <header className="restaurant-header">
       <div className="restaurant-name">

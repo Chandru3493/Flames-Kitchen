@@ -1,13 +1,16 @@
   import React, { useState, useEffect } from 'react';
   import axios from 'axios';
   import Button from 'react-bootstrap/Button';
-  import '../waiter.css';
+  
 
-  function TableArea({ onTableSelect }) {
+  function TableArea({ onTableSelect,data }) {
     const [tableStatus, setTableStatus] = useState({});
     const [selectedTable, setSelectedTable] = useState(null);
-
+    if (data && data ? data : true) {
+      import('../waiter.css');
+   }
     useEffect(() => {
+      
       const fetchTableStatuses = async () => {
         try {
           const response = await axios.get('http://localhost:4000/api/tables');

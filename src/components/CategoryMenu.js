@@ -1,8 +1,11 @@
 
 import React from 'react';
-import '../waiter.css'; 
 
-function CategoryMenu({ categories, selectedCategory, onCategoryChange }) {
+
+function CategoryMenu({ categories, selectedCategory, onCategoryChange,data }) {
+  if (data && data ? data : true) {
+    import('../waiter.css');
+ }
   return (
     <div className="category-menu">
       {categories.map((category) => (

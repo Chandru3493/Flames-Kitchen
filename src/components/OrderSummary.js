@@ -1,5 +1,5 @@
 import axios from 'axios';
-function OrderSummary({ cartItems, onRemoveFromCart, onQuantityChange,onPlaceOrder, handleCloseOrder, orderStatus, setOrderStatus, orderDetails, orderId}) {
+function OrderSummary({ data,cartItems, onRemoveFromCart, onQuantityChange,onPlaceOrder, handleCloseOrder, orderStatus, setOrderStatus, orderDetails, orderId}) {
   console.log('Order detials',orderDetails);
 
   const calculateTotal = (cartItems) => {
