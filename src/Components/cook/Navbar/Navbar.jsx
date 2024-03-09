@@ -5,7 +5,7 @@ import terms from "../../terms";
 
 const Navbar = (props) => {
 	const navigate = useNavigate();
-    const onLogout=async()=>{
+    const handleLogout=async()=>{
 		props.d.x();
 		await terms.fun2();
 		navigate("/");
@@ -14,14 +14,16 @@ const Navbar = (props) => {
 
 
 	return (
-		<nav className="navbar">
-			<div className="navbar-logo">
-				<img src="./logo.svg" />
-			</div>
-			<div className="navbar-links">
-				<button onClick={onLogout}>Logout</button>
-			</div>
-		</nav>
+		<div className='nav'>
+      <div id="fir">
+      <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
+        
+        <div id='tex'><div id='usern'>Hello {terms.user.name}</div>
+                             <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
+    Logout</div>
+        </div>
+        
+  </div>
 	);
 };
 

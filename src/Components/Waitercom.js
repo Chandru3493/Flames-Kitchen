@@ -5,15 +5,17 @@ import RestaurantHeader from './RestaurantHeader';
 import TableArea from './TableArea'; 
 import NotificationsBoard from './NotificationsBoard';
 import TableDetailsPopup from './TableDetailsPopup';
+import terms from './terms';
 
 function Waitercom(props) {
     const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
   const [isTableDetailsVisible, setIsTableDetailsVisible] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     // Clear the token from local storage
     localStorage.removeItem("token");
+    await terms.fun2();
     props.data.x();
     navigate("/");
     window.location.reload();
@@ -34,16 +36,16 @@ function Waitercom(props) {
  }
 
   return (<>
-    {/* <div className='nav'>
+    <div className='nav'>
       <div id="fir">
       <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
         
-        <div id='tex'><div id='usern'>Hello {props.data.use.name}</div>
+        <div id='tex'><div id='usern'>Hello {terms.user.name}</div>
                              <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
     Logout</div>
         </div>
         
-  </div> */}
+  </div>
     <div className='app-container'>
       <RestaurantHeader data={props.data.wtcss} />
       <div className='content-wrapper'>
