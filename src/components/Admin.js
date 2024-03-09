@@ -1,22 +1,23 @@
 import React,{ useState } from 'react'
-
+import terms from './terms.js'
 
 import ViewEmployee from './ViewEmployee.js'
 import ViewFinancialReport from './ViewFinancialReport'
 import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom'
 import Input from './Input.js'
+
 const Admin = (props) => {
-  const [one,setOne]= useState(true);
-  const [two,setTwo]= useState(false);
-  const [three,setThree]= useState(false);
+  
+ 
+  
  const navigate = useNavigate();
- const handleLogout = () => {
+ const handleLogout = async () => {
   localStorage.removeItem("token");
+  await terms.fun2();
   props.data.x();
   navigate("/");
   window.location.reload();
 };
-
 if (props.data && props.data.adcss ? props.data.adcss : true) {
   import('./anuragstyles.css');
 }
@@ -26,7 +27,7 @@ if (props.data && props.data.adcss ? props.data.adcss : true) {
       <div id="fir">
       <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
         
-        <div id='tex'><div id='usern'>Hello {props.data.use.name}</div>
+        <div id='tex'><div id='usern'>Hello {terms.user.name}</div>
                              <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
     Logout</div>
         </div>
@@ -40,13 +41,13 @@ if (props.data && props.data.adcss ? props.data.adcss : true) {
     <div className='pac'>
     
     <div className='tx'>
-        <div className='ex' onClick={()=>{setOne(true);setTwo(false);setThree(false)}}>
+        <div className='ex' onClick={()=>{navigate('ViewEmployee')}}>
             View Staff details
         </div>
-        <div className='ex' onClick={()=>{setOne(false);setTwo(true);setThree(false)}} >
+        <div className='ex' onClick={()=>{navigate('EditEmployee')}} >
             Edit Staff details
         </div>
-        <div className='ex' onClick={()=>{setOne(false);setTwo(false);setThree(true)}}>
+        <div className='ex' onClick={()=>{navigate('ViewFinancial')}}>
             View financial report
         </div>
         
@@ -56,9 +57,9 @@ if (props.data && props.data.adcss ? props.data.adcss : true) {
       
     <Routes>
           
-          {one&&<Route exact path="/" element={<ViewEmployee data={props.data.adcss}/>} ></Route>}
-          { two&& <Route exact path="/" element={<Input data={props.data.adcss}/>} ></Route>}
-          { three && <Route exact path="/" element={<ViewFinancialReport data={props.data.adcss}/>} ></Route>}</Routes>
+          <Route exact path="ViewEmployee" element={<ViewEmployee data={props.data.adcss}/>} ></Route>
+          <Route exact path="EditEmployee" element={<Input data={props.data.adcss}/>} ></Route>
+          <Route exact path="ViewFinancial" element={<ViewFinancialReport data={props.data.adcss}/>} ></Route></Routes>
     </div>
     
     

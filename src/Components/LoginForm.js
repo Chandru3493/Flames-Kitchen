@@ -4,8 +4,10 @@ import { jwtDecode } from "jwt-decode";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import logo from "./cook/Navbar/logo.png";
+import terms from './terms.js'
 
 function LoginForm(props) {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -50,12 +52,13 @@ function LoginForm(props) {
       }
 
       const responseData = await response.json();
+      console.log(responseData);
       const { user_id, token, user_roleId} = responseData; // Change user_role to user_id
       
       const decodedToken = jwtDecode(token);
       const names =decodedToken.userName;
       const ids =decodedToken.userId;
-      props.fun({name: names,id: ids,role: user_roleId});
+      await terms.fun({name: names,id: ids,role: user_roleId});
 
       if (user_roleId === 1) {
         navigate("/Fp0wLkQgHe3iMl7n4NqT");

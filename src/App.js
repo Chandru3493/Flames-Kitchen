@@ -49,9 +49,9 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LoginForm fun={settle} />} />
-        <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={{use,adcss,x}}/>} />
-        <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={{use,css,x}}/>} />
-        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waitercom data={{use,wtcss,x}}/>} />
+        <Route path="/Fp0wLkQgHe3iMl7n4NqT/*" element={<Admin data={{adcss,x}}/>} />
+        <Route path="/9v3pUZxEsR2dYr6wGh0I/*" element={<Complete data={{css,x}}/>} />
+        <Route path="/s8JcN7Q0kD3gT1fH4zYb/*" element={<Waitercom data={{use,wtcss,x}}/>} />
         
       </Routes>
       

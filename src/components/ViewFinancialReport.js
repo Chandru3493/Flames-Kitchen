@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import Data from './Data'
 import Transaction from './Transaction'
 import axios from 'axios';
-import config from './terms';
+import terms from './terms';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+const config = terms.config;
 
 
 

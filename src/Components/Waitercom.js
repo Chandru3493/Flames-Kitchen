@@ -34,7 +34,7 @@ function Waitercom(props) {
  }
 
   return (<>
-    <div className='nav'>
+    {/* <div className='nav'>
       <div id="fir">
       <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
         
@@ -43,7 +43,7 @@ function Waitercom(props) {
     Logout</div>
         </div>
         
-  </div>
+  </div> */}
     <div className='app-container'>
       <RestaurantHeader data={props.data.wtcss} />
       <div className='content-wrapper'>
