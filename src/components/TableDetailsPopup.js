@@ -27,7 +27,7 @@ function TableDetails({ selectedTable, onClose }) {
     try {
       //console.log('Updating table with ID:', selectedTable.id); 
 
-      await axios.put(`http://localhost:3002/api/tables/${selectedTable?.id}`, { status: newStatus });
+      await axios.put(`http://localhost:4000/api/tables/${selectedTable?.id}`, { status: newStatus });
       //console.log('Table status updated');
     } catch (error) {
       console.error('Error updating table status:', error);
@@ -38,7 +38,7 @@ function TableDetails({ selectedTable, onClose }) {
     setOccupancy(newOccupancy); 
   
     try {
-      await axios.put(`http://localhost:3002/api/tables/${selectedTable?.id}`, { capacity: newOccupancy });
+      await axios.put(`http://localhost:4000/api/tables/${selectedTable?.id}`, { capacity: newOccupancy });
       console.log('Table occupancy updated');
     } catch (error) {
       console.error('Error updating table occupancy:', error);

@@ -18,7 +18,7 @@ function NotificationsBoard() {
 
   const fetchNotifications = async (orderId) => {
     try {
-      const response = await axios.get(`http://localhost:3002/api/orders/${orderId}/status`); 
+      const response = await axios.get(`http://localhost:4000/api/orders/${orderId}/status`); 
 
       if (response.data.message) {  
         setNotifications(prevNotifications => ([...prevNotifications, response.data]));

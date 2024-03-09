@@ -21,8 +21,8 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
     const fetchMenuItems = async (category = 'All') => {
       try {
         const endpoint = category === 'All'
-          ? 'http://localhost:3002/api/menu-items'
-          : `http://localhost:3002/api/menu-items/${category}`;
+          ? 'http://localhost:4000/api/menu-items'
+          : `http://localhost:4000/api/menu-items/${category}`;
 
         const response = await axios.get(endpoint);
         setMenuItems(response.data);
@@ -38,7 +38,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
   useEffect(() => {
     const fetchOpenOrders = async () => {
       try {
-        const response = await axios.get(`http://localhost:3002/api/orders/table/${tableNumber}`); 
+        const response = await axios.get(`http://localhost:4000/api/orders/table/${tableNumber}`); 
         const existingOrders = response.data;
         console.log('Existing Orders:', existingOrders);
 
@@ -103,7 +103,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
   const handlePlaceOrder = async () => { 
     try {
       // 1. Create the order on the backend
-      const newOrderResponse = await axios.post('http://localhost:3002/api/orders', {
+      const newOrderResponse = await axios.post('http://localhost:4000/api/orders', {
         table_id: tableNumber, // Pass in the table number
         waiter_id: 1, // replace with actual waiter ID
         status: 'Order Placed', // Initial status
@@ -115,7 +115,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
 
       // 2. Create order items on the backend
       const orderItemPromises = cartItems.map((item) =>
-        axios.post('http://localhost:3002/api/order-items', {
+        axios.post('http://localhost:4000/api/order-items', {
           order_id,
           menu_item_id: item.id,
           cook_id: 1, // replace with actual cook ID
@@ -127,7 +127,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
       await Promise.all(orderItemPromises); // Wait for creation
 
 
-      const orderResponse = await axios.get(`http://localhost:3002/api/orders/${order_id}`);
+      const orderResponse = await axios.get(`http://localhost:4000/api/orders/${order_id}`);
       setOrderDetails(orderResponse.data);                   
        // Set order status and clear the cart
       setOrderId(order_id); 
@@ -162,7 +162,7 @@ function OrderTakingPopup({ show, onClose, tableNumber }) {
 
   const handleCloseOrder = async () => { 
     try {
-      await axios.put(`http://localhost:3002/api/orders/${orderId}/status`, { status: 'Order Closed' });
+      await axios.put(`http://localhost:4000/api/orders/${orderId}/status`, { status: 'Order Closed' });
       setOrderStatus('Order Closed');
       setCartItems([]);
     } catch (error) {

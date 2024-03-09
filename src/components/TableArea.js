@@ -10,7 +10,7 @@
     useEffect(() => {
       const fetchTableStatuses = async () => {
         try {
-          const response = await axios.get('http://localhost:3002/api/tables');
+          const response = await axios.get('http://localhost:4000/api/tables');
           setTableStatus(response.data);
         } catch (error) {
           console.error("Error fetching table data:", error);
@@ -22,7 +22,7 @@
     const handleTableClick = async (tableId) => {
       try {
   
-        const response = await axios.get(`http://localhost:3002/api/tables/${tableId}`);
+        const response = await axios.get(`http://localhost:4000/api/tables/${tableId}`);
         setSelectedTable(response.data); 
         onTableSelect(response.data); 
       } catch (error) {
@@ -33,7 +33,7 @@
     // Function to update the table status when the status changes
     const updateTableStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/api/tables');
+        const response = await axios.get('http://localhost:4000/api/tables');
         setTableStatus(response.data);
       } catch (error) {
         console.error("Error updating table status:", error);

@@ -20,7 +20,7 @@ function OrderSummary({ cartItems, onRemoveFromCart, onQuantityChange,onPlaceOrd
 
 const handleDelivered = async () => {
   try {
-    await axios.put(`http://localhost:3002/api/orders/${orderId}/status`, { status: 'Order Delivered' });
+    await axios.put(`http://localhost:4000/api/orders/${orderId}/status`, { status: 'Order Delivered' });
     setOrderStatus('Order Delivered');
   } catch (error) {
     console.error('Error updating order status to Delivered:', error);
