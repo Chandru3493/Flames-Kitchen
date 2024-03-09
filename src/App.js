@@ -1,10 +1,11 @@
 
+
 import React, { useReducer } from "react";
-import "./App.css";
+
 import LoginForm from "./Components/LoginForm";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import logo from './logo.svg';
-import './App.css';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Admin from './Components/Admin';
@@ -15,6 +16,7 @@ import ViewFinancialReport from "./Components/ViewFinancialReport.js";
 import Input from "./Components/Input.js";
 import { useState } from "react";
 import Complete from "./Components/cook/Complete";
+import Waitercom from "./Components/Waitercom.js";
 
 function App() {
   const navigate = useNavigate();
@@ -39,10 +41,11 @@ function App() {
         <Route path="/" element={<LoginForm fun={settle} />} />
         <Route path="/Fp0wLkQgHe3iMl7n4NqT" element={<Admin data={{use}}/>} />
         <Route path="/9v3pUZxEsR2dYr6wGh0I" element={<Complete data={{use,css,x}}/>} />
-        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waiter data={{use}}/>} />
+        <Route path="/s8JcN7Q0kD3gT1fH4zYb" element={<Waitercom data={{use}}/>} />
         
       </Routes>
       
+
     </div>
 
   );

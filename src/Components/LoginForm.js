@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
-import logo from "./Logo.png";
+import logo from "./cook/Navbar/logo.png";
 
 function LoginForm(props) {
   const [email, setEmail] = useState("");
