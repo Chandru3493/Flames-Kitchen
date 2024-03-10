@@ -4,25 +4,26 @@ import toast from "react-hot-toast";
 import axios from "axios";
 // import socketIOClient from 'socket.io-client';
 
-const ListTasks = ({ tasks, setTasks,user }) => {
+const ListTasks = ({ tasks, setTasks, user }) => {
 	const [todos, setTodos] = useState([]);
 	const [inProgress, setInProgress] = useState([]);
 	const [closed, setClosed] = useState([]);
-	
+
 	useEffect(() => {
-	// 	const sock = socketIOClient('http://localhost:4000');
-	// sock.on('update', () => {
-	// 	console.log('this is socket');
-	// 	fetchTasks();
-	//   });
+		// 	const sock = socketIOClient('http://localhost:4000');
+		// sock.on('update', () => {
+		// 	console.log('this is socket');
+		// 	fetchTasks();
+		//   });
 		fetchTasks();
 	}, []);
 
-	
+	useEffect(() => {
+		updateOrderPrep();
+	}, [todos, inProgress, closed]);
 
 	const fetchTasks = async () => {
 		try {
-			
 			const response = await axios.get("http://localhost:4000/orderItems");
 			const fetchedTasks = response.data;
 			// console.log("Response: ", response.data);
@@ -30,7 +31,7 @@ const ListTasks = ({ tasks, setTasks,user }) => {
 			console.log("Ftodos: ", ftodos);
 			console.log("Response: ", response.data);
 			const fInProgress = fetchedTasks.filter(
-				(task) => (task.status === "inprogress" && task.cook_id===user.id)
+				(task) => task.status === "inprogress" && task.cook_id === user.id
 			);
 			console.log("FinProgress: ", fInProgress);
 			const fClosed = fetchedTasks.filter((task) => task.status === "closed");
@@ -39,8 +40,38 @@ const ListTasks = ({ tasks, setTasks,user }) => {
 			setTodos(ftodos);
 			setInProgress(fInProgress);
 			setClosed(fClosed);
+
+			// updateOrderPrep(user.id);
 		} catch (error) {
 			console.error("Error fetching tasks:", error);
+		}
+		// updateOrderPrep();
+	};
+	const updateOrderPrep = async (orderItemId) => {
+		try {
+			if (orderItemId) {
+				// Check if orderItemId is defined
+				console.log("order id : ", orderItemId);
+				const response = await axios.get(
+					`http://localhost:4000/orderItems/count`,
+					{ params: { orderItemId } }
+				);
+
+				const todoCount = response.data.count;
+				console.log("count from listask :", todoCount);
+
+				await axios.put(`http://localhost:4000/orders/${orderItemId}`, {
+					orderItemId,
+					todoCount,
+				});
+
+				// Optionally, you can fetch and update the tasks to reflect the changes
+				fetchTasks();
+			} else {
+				console.log("orderItemId is undefined");
+			}
+		} catch (error) {
+			console.error("Error updating order_prep:", error);
 		}
 	};
 
@@ -49,7 +80,7 @@ const ListTasks = ({ tasks, setTasks,user }) => {
 			<div className="flex gap-16">
 				{["todo", "inprogress", "closed"].map((status, index) => (
 					<Section
-					    use = {user}
+						use={user}
 						key={index}
 						status={status}
 						tasks={tasks}
@@ -58,6 +89,7 @@ const ListTasks = ({ tasks, setTasks,user }) => {
 						inProgress={inProgress}
 						closed={closed}
 						fetchTasks={fetchTasks}
+						updateOrderPrep={updateOrderPrep}
 					/>
 				))}
 			</div>
@@ -74,6 +106,7 @@ const Section = ({
 	inProgress,
 	closed,
 	fetchTasks,
+	updateOrderPrep,
 }) => {
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: "task",
@@ -118,15 +151,17 @@ const Section = ({
 	}
 
 	const addItemToSection = async (id) => {
-		const cookid=use.id;
+		const cookid = use.id;
+		console.log("Cook Id :", cookid);
 		try {
 			const response = await axios.put(
 				`http://localhost:4000/orderItems/${id}`,
-				{ status,cookid }
+				{ status, cookid }
 			);
 			if (response.status === 200) {
 				toast("Task status changed successfully.", { icon: "😲" });
 				fetchTasks(); // Refresh tasks after status change
+				updateOrderPrep(id);
 			}
 		} catch (error) {
 			console.error("Error updating task status:", error);
@@ -217,18 +252,42 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 			>
 				<img src="information.png" alt="" />
 			</button>
+
 			{showDetails && (
-				<div className="modal">
-					<div className="modal-content">
-						<span className="close" onClick={handleToggleDetails}>
-							&times;
-						</span>
-						<h2>Task Details</h2>
-						<p>Table ID: {task.tableId}</p>
-						<p>Waiter ID: {task.waiterId}</p>
-						<p>Cook ID: {task.cook_id}</p>
-						<p>Quantity: {task.quantity}</p>
-						<p>Description: {task.menuitem.description}</p>
+				<div className="fixed inset-0 overflow-y-auto flex justify-center items-center z-50">
+					<div className="fixed inset-0 transition-opacity">
+						<div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+					</div>
+					<div className="bg-white rounded-lg p-8 z-50 max-w-md">
+						<div className="text-right">
+							<button
+								className="text-gray-400 hover:text-gray-600 focus:outline-none"
+								onClick={handleToggleDetails}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</button>
+						</div>
+						<div className="mt-4">
+							<h2 className="text-xl font-bold mb-4">Task Details</h2>
+							<p className="mb-2">Table ID: {task.tableId}</p>
+							<p className="mb-2">Waiter ID: {task.waiterId}</p>
+							<p className="mb-2">Cook ID: {task.cook_id}</p>
+							<p className="mb-2">Quantity: {task.quantity}</p>
+							<p>Description: {task.menuitem.description}</p>
+						</div>
 					</div>
 				</div>
 			)}
@@ -236,20 +295,21 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 				className="absolute bottom-1 right-1 text-slate-400"
 				onClick={() => handleRemove(task.id)}
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					strokeWidth={1.5}
-					stroke="currentColor"
-					className="w-6 h-6"
-				>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-					/>
-				</svg>
+				{/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                </svg>
+                */}
 			</button>
 		</div>
 	);

@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const Transaction = (props) => {
+  if (props.data && props.data ? props.data : true) {
+    import('./anuragstyles.css');
+  }
     const data=props.jargon
   return (
     <div style={{width: "100%"}}>

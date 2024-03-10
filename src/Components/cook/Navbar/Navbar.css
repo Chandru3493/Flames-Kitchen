@@ -1,35 +1,62 @@
-/* Navbar.css */
-
-.navbar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: #d7d7d7; /* Greyish background */
-	padding: 10px 20px; /* Adjust padding as needed */
+#tuo{
+	color:#D7D7D7;
+	font-family: Copperplate,Copperplate Gothic Light,fantasy; 
+	font-size: 150%;
+	font-weight: bold;
+	align-self: center;
+  }
+  
+  #tex{
+	align-self: flex-end;
+	margin-left: 9%;
+	width: 20%;
+	padding: 1%;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.navbar-logo button {
-	background-color: transparent;
-	border: none;
-	color: #333; /* Dark grey text color */
-	font-size: 16px;
-	cursor: pointer;
-}
-
-.navbar-links button {
-	background-color: #ffc529; /* Yellow logout button */
-	border: none;
-	padding: 8px 15px;
-	color: #333; /* Dark grey text color */
-	font-size: 16px;
-	cursor: pointer;
-	border-radius: 5px;
-}
-
-.navbar-links button:hover {
-	background-color: #ffc529; /* Darker yellow on hover */
-}
+	flex-direction: row;
+	color: #D7D7D7;
+	
+	
+  
+  }
+  
+  #usern{
+	align-self: center;
+	font-weight: bold;
+  }
+  
+  #fir{
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+	
+	
+  }
+  
+  
+  
+  #log {
+	align-self: center;
+	margin-left: 2%;
+	width: 50%;
+	text-align: center;
+	font-size: 70%;
+	
+  }
+  
+  .imag{
+	width: 75px;
+	height: 75px;
+	
+  }
+  
+  .nav {
+	width: 100vmax;
+	border-bottom-style : solid;
+	padding: 1%;
+	border-color: #272D2F;
+	border-top: none ;
+	border-right: none;
+	border-left: none ;
+	background-color: #272D2F;
+	
+  }
