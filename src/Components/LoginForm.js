@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import "./LoginForm.css";
@@ -7,7 +6,7 @@ import logo from "./cook/Navbar/logo.png";
 import terms from './terms.js'
 
 function LoginForm(props) {
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -29,12 +28,12 @@ function LoginForm(props) {
     event.preventDefault();
 
     if (!email.trim()) {
-      setErrors({ email: "Email is required" });
+      setErrors({ emailError: "Email is required" });
       return;
     }
 
     if (!password.trim()) {
-      setErrors({ password: "Password is required" });
+      setErrors({ passwordError: "Password is required" });
       return;
     }
 
@@ -54,7 +53,7 @@ function LoginForm(props) {
       const responseData = await response.json();
       console.log(responseData);
       const { user_id, token, user_roleId} = responseData; // Change user_role to user_id
-      
+
       const decodedToken = jwtDecode(token);
       const names =decodedToken.userName;
       const ids =decodedToken.userId;
@@ -74,38 +73,38 @@ function LoginForm(props) {
   };
 
   return (
-    <div id="main">
-      <img src={logo} alt="Flame-s-Kitchen-Logo"  id="Hotel_logo"/>
+    <div id="login-main">
+      <img src={logo} alt="Flame-s-Kitchen-Logo" id="login-Hotel_logo"/>
       <div className="login-background">
         <div className="login-container">
           <center>
             <h2>Flame's Kitchen</h2>
           </center>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label id="emailab" htmlFor="email">Email</label>
+          <form onSubmit={handleSubmit} id="login-form">
+            <div className="login-input-group">
+              <label htmlFor="login-email">Email</label>
               <input
                 type="text"
-                id="email"
-                name="email"
+                id="login-email"
+                name="login-email"
                 value={email}
                 onChange={handleEmailChange}
                 required
               />
               <br />
-              {errors.email && <span className="error">{errors.email}</span>}
+              {errors.emailError && <span className="login-error">{errors.emailError}</span>}
             </div>
-            <div className="input-group">
-              <label id="passlab" htmlFor="password">Password</label>
+            <div className="login-input-group">
+              <label htmlFor="login-password">Password</label>
               <input
                 type="password"
-                id="password"
-                name="password"
+                id="login-password"
+                name="login-password"
                 value={password}
                 onChange={handlePasswordChange}
                 required
               />
-              {errors.password && <span className="error">{errors.password}</span>}
+              {errors.passwordError && <span className="login-error">{errors.passwordError}</span>}
             </div>
             <center>
               <button type="submit" className="btn-login">
@@ -117,7 +116,7 @@ function LoginForm(props) {
             <div className="custom-alert">
               <div className="custom-alert-content">
                 <center>
-                  <span id="LoginFrom-waringSign">Wrong ID and Password</span>
+                  <span id="login-LoginFrom-waringSign">Wrong ID and Password</span>
                 </center>
               </div>
             </div>
