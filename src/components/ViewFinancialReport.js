@@ -71,7 +71,11 @@ const ViewFinancialReport = (props) => {
   
   const handlesearch=async()=>{
     setSelect();
-    const date = startDate.getDate()+"-"+(startDate.getMonth()+1)+"-"+startDate.getFullYear()
+    var yr = startDate.getFullYear().toString();
+    var mon = ((startDate.getMonth()+1).toString().length===1?'0'+(startDate.getMonth()+1).toString():(startDate.getMonth()+1).toString());
+    var day =((startDate.getDate()).toString().length===1?'0'+(startDate.getDate()).toString():(startDate.getDate()).toString());
+    const date = yr+"-"+mon+"-"+day
+    console.log(date);
     
     const dbfetch =await axios.get(`http://${config.v}:${config.port}/day?datestamp=${date}`)
     if(dbfetch.data==="No data for this date found"){
