@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
 
-const Edit = ({todo,funct}) => {
+const Edit = ({todo,funct,stat1,stat2,stat3}) => {
 
   const [salary, setSalary] = useState(todo.salary);
   const [name, setName] = useState(todo.name);
   const [email, setEmail] = useState(todo.email_id);
   const [address, setAddress] = useState(todo.address);
   const [role, setRole] = useState(todo.role);
+  const [tog,setTog] = useState(false);
   const updateDescription = async e => {
     e.preventDefault();
     try {
@@ -21,10 +22,13 @@ const Edit = ({todo,funct}) => {
       );
       const jsonData = await response.json();
       if(jsonData.length!==0){
-        window.alert("Email already exists")
+        stat3()
+      }else{
+        stat1()
       }
   
       funct()
+
     } catch (err) {
       console.error(err.message);
     }
@@ -38,6 +42,7 @@ const Edit = ({todo,funct}) => {
     })
     //window.alert("Deleted Successfully")
     funct()
+    stat2()
   }
 
   return (
@@ -47,7 +52,7 @@ const Edit = ({todo,funct}) => {
         class="btn btn-warning mx-2"
         data-toggle="modal"
         data-target={`#i${todo.id}`}
-        onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);}}
+        onClick={() =>{setName(todo.name);setEmail(todo.email_id);setAddress(todo.address);setSalary(todo.salary);setTog(false)}}
       >
         Edit Info
       </button>
@@ -59,7 +64,7 @@ const Edit = ({todo,funct}) => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Info Id:{todo.id}</h4>
+              <h4 class="modal-title">Edit Info</h4>
               <button
                 type="button"
                 className="close"
@@ -129,9 +134,38 @@ const Edit = ({todo,funct}) => {
             </div>
 
             <div class="modal-footer">
-              <button
+              
+              {/*<button
                 type="button"
-                class="btn btn-warning"
+                class="btn btn-danger"
+                
+                //data-dismiss="modal"
+                //onClick={() =>delEmp()}
+                onClick={()=>{setTog(!tog)}}
+              >
+                Delete
+              </button>*/}
+              {
+                tog?(
+                  <div className="d-flex justify-content-center align-items-center">
+                    <p className="mt-2 pt-1 font-weight-bold">Are you sure ?</p>
+                    <btn 
+                type="button" className="btn btn-danger mr-2 ml-2" data-dismiss="modal" onClick={()=> {delEmp(); setTog(!tog);}}>Delete
+               
+                </btn>
+                <btn
+                type="button" className="btn btn-warning" onClick={()=> {setTog(!tog);}}>Cancel
+                </btn>
+                
+                  </div>
+                  
+                
+                ):(
+                
+                <div>
+                  <button
+                type="button"
+                class="btn btn-warning mr-2"
                 data-dismiss="modal"
                 data-toggle="modal"
                 data-target="#status"
@@ -140,27 +174,19 @@ const Edit = ({todo,funct}) => {
                 Edit
               </button>
               <button
-                type="button"
-                class="btn btn-danger"
-                id="liveToastBtn"
-                data-dismiss="modal"
-                onClick={() =>delEmp()}
-              >
-                Delete
-              </button>
-              <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-</div>
+                  type="button"
+                  class="btn btn-danger"
+                  
+                  //data-dismiss="modal"
+                  //onClick={() =>delEmp()}
+                  onClick={()=>{setTog(!tog)}}
+                >
+                  Delete
+                </button>
+                </div>
+               )
+  }
+
             </div>
           </div>
         </div>
@@ -169,4 +195,5 @@ const Edit = ({todo,funct}) => {
   );
 };
 
-export default Edit;
+export 
+default Edit;
