@@ -51,7 +51,7 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
           // Adjust items mapping 
           const items = activeOrder.orderitems.map(orderitem => ({
             id: orderitem.menu_item_id, 
-            name: orderitem.name, 
+            name: orderitem.menuitem.name, 
             price: orderitem.price,
             quantity: orderitem.quantity
           }));
@@ -67,11 +67,9 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
         console.error('Error fetching orders:', error);
       }
     };
-
     // Fetch orders when the component mounts and when tableNumber changes
     if (show) fetchOpenOrders(); 
   }, [show, tableNumber]); 
-
 
   const filterMenuItems = (category) => {
     return category === 'All' 
@@ -109,12 +107,12 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
       const newOrderResponse = await axios.post('http://localhost:4000/api/orders', {
         table_id: tableNumber, // Pass in the table number
         waiter_id: 1, // replace with actual waiter ID
-        status: 'Order Placed', // Initial status
+        status: 'todo', // Initial status
         total_amount: calculateTotal(cartItems), // Calculate the total amount
         order_time: new Date().toISOString() // Current time
       });
       const order_id = newOrderResponse.data.id;
-      setOrderStatus('Order Placed');
+      setOrderStatus('todo');
 
       // 2. Create order items on the backend
       const orderItemPromises = cartItems.map((item) =>
@@ -134,7 +132,7 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
       setOrderDetails(orderResponse.data);                   
        // Set order status and clear the cart
       setOrderId(order_id); 
-      setOrderStatus('Order Placed'); 
+      setOrderStatus('todo'); 
     } catch (error) {
       console.error('Error creating order:', error);
     }
@@ -185,7 +183,7 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
         <div className="order-taking-container">
          <CategoryMenu 
               data={data}
-              categories={["starter","main course", "dessert",  "All"]}
+              categories={["Starter","Main Course", "Dessert",  "All"]}
               selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryClick}
           />

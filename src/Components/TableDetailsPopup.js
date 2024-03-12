@@ -65,16 +65,16 @@ function TableDetails({ selectedTable, onClose,data }) {
       {selectedTable && (
         <div className="popup-container">
           <div className="popup-content">
-            <p>Table ID: {selectedTable?.id}</p>
+            <p><h4>Table ID:</h4>    {selectedTable?.id}</p>
             <p>
-              Occupancy:
+              <h4>Occupancy:</h4>
               <select value={occupancy} onChange={(e) => handleOccupancyChange(e.target.value)}>
                 {[...Array(11).keys()].map(num => (
                   <option key={num} value={num}>{num}</option>
                 ))}
               </select>
             </p>
-            <p>Status:</p>
+            <h4>Status:</h4>
             <div>
               <select value={status} onChange={(e) => handleStatusChange(e.target.value)}>
                 <option value="Available">Available</option>
@@ -84,12 +84,13 @@ function TableDetails({ selectedTable, onClose,data }) {
               </select>
             </div>
           </div>
-          <button className="popup-button popup-button-close" onClick={handleCloseOrderPopup}>Close</button>
+          
           {status === 'Occupied' && (
             <div className="popup-buttons">
               <button className="popup-button popup-button-action" onClick={handleTakeOrder}>Take Order</button>
             </div>
           )}
+          <button className="popup-button popup-button-close" onClick={handleCloseOrderPopup}>&larr;</button>
         </div>
       )}
       <OrderTakingPopup 
@@ -121,11 +122,6 @@ function TableDetailsPopup({ selectedTable, onClose }) {
         centered
         dialogClassName="table-details-modal"
       >
-        <Modal.Header closeButton className="modal-header"> 
-          <Modal.Title>Table Details</Modal.Title>
-        </Modal.Header>
-
-
         <Modal.Body>
           <TableDetails selectedTable={selectedTable} onClose={onClose} />
         </Modal.Body>

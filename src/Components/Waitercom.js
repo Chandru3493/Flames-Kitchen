@@ -6,6 +6,7 @@ import TableArea from './TableArea';
 import NotificationsBoard from './NotificationsBoard';
 import TableDetailsPopup from './TableDetailsPopup';
 import terms from './terms';
+import StatisticsBar from './StatisticsBar';
 
 function Waitercom(props) {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Waitercom(props) {
   return (<>
     <div className='nav'>
       <div id="fir">
-      <div id='ine'><img className='imag' src="./logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
+      <div id='ine'><img className='imag' src="./imgs/Logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
         
         <div id='tex'><div id='usern'>Hello {terms.user.name}</div>
                              <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
@@ -52,7 +53,8 @@ function Waitercom(props) {
         <TableArea data={props.data.wtcss} onTableSelect={handleTableSelect} />
         <TableDetailsPopup data={props.data.wtcss} selectedTable={selectedTable} onClose={handleClosePopup} />
         <div className='side-area'>
-          <NotificationsBoard data={props.data.wtcss} />
+        <NotificationsBoard data={props.data.wtcss} />
+        <StatisticsBar data={props.data.wtcss} />         
         </div>
       </div>
 

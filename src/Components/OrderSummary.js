@@ -18,6 +18,43 @@ function OrderSummary({ data,cartItems, onRemoveFromCart, onQuantityChange,onPla
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(total);
 };
 
+const orderStatusMessages = {
+  todo: "Order Placed", 
+  inprogress: "Chef performing his magic",
+  done: "Order Prepared",
+  'order delivered': "Order Delivered",
+  'order closed': "Order Closed"
+};
+
+const displayOrderStatus = () => {
+  const currentStatus = orderStatus.toLowerCase(); // Normalize to lowercase
+
+  // Check if the status exists in your mapping
+  if (orderStatusMessages.hasOwnProperty(currentStatus)) {
+    return orderStatusMessages[currentStatus]; 
+  } else { 
+    return "Waiting for Orders"; // Default message for unexpected status
+  }
+};
+
+
+const renderButtons = () => {
+  switch (orderStatus.toLowerCase()) {
+    case 'waiting for order': 
+      return <button onClick={onPlaceOrder} className="place-order-button" disabled={cartItems.length === 0} >Place Order</button>
+    case 'done': 
+      return <div>
+      <button onClick={handleDelivered} className="delivered-button">Delivered</button>
+      <button onClick={handleCloseOrder} className="close-order-button">Close Order</button>
+
+      </div>
+    case 'order closed':
+      return <button onClick={onPlaceOrder} className="place-order-button" disabled={cartItems.length === 0} >Place Next Order</button>
+    default: 
+      return <button onClick={handleCloseOrder} className="close-order-button">Close Order</button>
+  }
+};
+
 const handleDelivered = async () => {
   try {
     await axios.put(`http://localhost:4000/api/orders/${orderId}/status`, { status: 'Order Delivered' });
@@ -35,7 +72,7 @@ const handleDelivered = async () => {
         {orderDetails && (
         <div className="order-details">
           <p>Order ID: {orderId || 'None'}</p> 
-          <p>Order Status: {orderStatus}</p>
+        
           
         </div>
       )}
@@ -107,19 +144,10 @@ const handleDelivered = async () => {
         </table>
       )}
       <>
-      {orderStatus === 'Order Closed' ? orderStatus='Waiting for Order' : orderStatus}
-
-      {orderStatus === 'Waiting for Order' && ( 
-        <button onClick={onPlaceOrder} className="place-order-button" disabled={cartItems.length === 0} >Place Order</button> 
-      )}
-
-      {orderStatus === 'Order Placed' && (
-        <button onClick={handleDelivered} className="delivered-button">Delivered</button>
-      )}
-
-      {orderStatus !== 'Waiting for Order' && ( 
-        <button onClick={handleCloseOrder} className="close-order-button">Close Order</button> 
-      )}
+      <div className="order-status">
+           {displayOrderStatus()} 
+          </div>
+          {renderButtons()} 
     </>
     </div>
   );
