@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
-import logo from "./cook/Navbar/logo.png";
+import Logo from "../imgs/Logo.png"
+
 import terms from './terms.js'
 
 function LoginForm(props) {
@@ -60,7 +61,7 @@ function LoginForm(props) {
       await terms.fun({name: names,id: ids,role: user_roleId});
 
       if (user_roleId === 1) {
-        navigate("/Fp0wLkQgHe3iMl7n4NqT");
+        navigate("/Fp0wLkQgHe3iMl7n4NqT/AddEmployee");
       } else if (user_roleId === 3) {
         navigate("/9v3pUZxEsR2dYr6wGh0I");
       } else if (user_roleId === 2) {
@@ -74,7 +75,7 @@ function LoginForm(props) {
 
   return (
     <div id="login-main">
-      <img src={logo} alt="Flame-s-Kitchen-Logo" id="login-Hotel_logo"/>
+      <img src={Logo}alt="Flame-s-Kitchen-Logo" id="login-Hotel_logo"/>
       <div className="login-background">
         <div className="login-container">
           <center>

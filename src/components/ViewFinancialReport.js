@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 import Data from './Data'
 import Transaction from './Transaction'
@@ -7,6 +8,7 @@ import terms from './terms';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import { useEffect } from 'react';
 const config = terms.config;
 
 
@@ -15,62 +17,33 @@ const ViewFinancialReport = (props) => {
   if (props.data && props.data ? props.data : true) {
     import('./anuragstyles.css');
   }
-  // const [day,setDay]=useState()
-  // const [month,setMonth]=useState()
-  // const [year,setYear]=useState()
-  // const [fetched,setFetched]=useState([
-  //   {date: "1-5-2024",StartBal: 25000,transactions: [{
-  //     time: "0800",
-  //     mode: "cash",
-  //     name: "A",
-  //     refid: "1",
-  //     type: "food order",
-  //     items: ["fried rice","chicken curry","naan","paneer butter masala"],
-  //     sum: 1000
-
-  //   },{
-  //     time: "1000",
-  //     mode: "online",
-  //     name: "B",
-  //     refid: "Xy123",
-  //     type: "food order",
-  //     items: ["fried rice","chicken curry","naan","kadai paneer"],
-  //     sum: 1100
-
-  //   },{
-  //     time: "1100",
-  //     mode: "cash",
-  //     type: "supplier payment",
-  //     name: "Supplier A",
-  //     refid: "Xy1234",
-  //     items: ["chicken","paneer","potatoes","flour","milk"],
-  //     sum: 700
-
-  //   },{
-  //     time: "1130",
-  //     mode: "online",
-  //     type: "supplier payment",
-  //     name: "Supplier B",
-  //     refid: "GH1234",
-  //     items: ["fish","carrots","apples"],
-  //     sum: 500
-
-  //   },]}
-  // ])
-
+  const [find,setFind] = useState();
+  useEffect(()=>{
+    
+   handlesearch();
+  },[])
+  
   const [found,setFound]=useState();
   const [select,setSelect]=useState();
   
   const [startDate,setStartDate]=useState(new Date());
+  const [click,setClick]=useState();
+  var items =0
+  const clicker=(id)=>{
+    console.log(id)
+   setClick(id);
+  }
 
+  
  
   const selection=(dataitem)=>{
-       console.log(dataitem)
+       
        setSelect(dataitem)
   }
   
   const handlesearch=async()=>{
     setSelect();
+    setFound();
     var yr = startDate.getFullYear().toString();
     var mon = ((startDate.getMonth()+1).toString().length===1?'0'+(startDate.getMonth()+1).toString():(startDate.getMonth()+1).toString());
     var day =((startDate.getDate()).toString().length===1?'0'+(startDate.getDate()).toString():(startDate.getDate()).toString());
@@ -79,9 +52,16 @@ const ViewFinancialReport = (props) => {
     
     const dbfetch =await axios.get(`http://${config.v}:${config.port}/day?datestamp=${date}`)
     if(dbfetch.data==="No data for this date found"){
-      window.alert("No data for this date found");
+      if(find===undefined){
+        setFind(false);
+      }else{
+         setFind(true);
+         window.alert("No data for this date found");
+      }
       return;
     }
+
+    setFind(true);
     var data = dbfetch.data;
     data.transactions.sort((a,b)=>{return a.time - b.time;})
     
@@ -118,14 +98,16 @@ const ViewFinancialReport = (props) => {
    </div></div>
     
  
- {found &&
+ {find && found &&
   <div className='datavisualiser'>
     <div className='chart'>
       <div className='buttona'  id='start'>{found.starting_balance}</div>
       <div className='callus'>
         {found.transactions.map((transaction)=>{
+          items++;
+          const t = items.toString()
           return(
-         <Data info = {transaction} fun={selection}/>)}
+         <Data ke={t} info = {transaction} fun2={clicker} clickinf={click} fun={selection}/>)}
 
         )}
       </div>
@@ -137,6 +119,15 @@ const ViewFinancialReport = (props) => {
 
 
   </div>}
+
+  {!find && <div id='nfb'>
+    
+    
+  <p id="nf">No data for today as of yet</p>
+
+  </div>
+    
+  }
     
     
      </div>

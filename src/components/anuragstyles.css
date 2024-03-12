@@ -55,6 +55,7 @@
 
 
 
+
 #log {
   align-self: center;
   margin-left: 2%;
@@ -70,10 +71,16 @@
   
 }
 
+#nf{
+  font-weight: bold;
+  font-size: 100%;
+  text-align: center;
+
+}
+
 .nav {
   width: 100vmax;
   border-bottom-style : solid;
-  padding: 1%;
   border-color: #272D2F;
   border-top: none ;
   border-right: none;
@@ -110,6 +117,11 @@
     flex-direction: row;
 }
 
+#nfb{
+  width: 100%;
+  margin-top: 5%;
+}
+
 
 .buttona {
     background-color: #FFC529; /* Yellow background */
@@ -142,6 +154,8 @@
     margin-left: 1%;
     font-size: 70%;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
  
 .ex{
@@ -305,13 +319,17 @@ width: 70%;
     
   
     border-radius: 50%;
-    height: 15px;
-    width: 15px;
+    height: 30px;
+    width: 30px;
     background-color: #FE724C;
     text-align: center;margin-left: 2%;
-    
+    padding-top: 2px;
+    font-weight: bold;
+    font-size: 80%;
+    margin-left: 2.5%;
     border-style: solid;
     border-color: #272D2F;
+    cursor: pointer;
 
     
       
@@ -355,8 +373,8 @@ width: 70%;
 }
 
 .link{
-    width: 0.1%;
-    margin-left: 15px;
+    width: 2px;
+    margin-left: 4.15%;
     height: 50%;
     border-top: none;
     border-bottom: none;
@@ -364,18 +382,40 @@ width: 70%;
 }
 
 .ddt{border-radius: 50%;
-    height: 20px;
-    width: 20px;
+    height: 45px;
+    width: 45px;
     background-color: #D7D7D7;
     text-align: center;
     margin-left: 2%;
-    
+    font-size: 130%;
+    padding-left: 1px;
+    padding-top:2px;
+    font-weight: bold;
     border-style: solid;
-    border-color: #272D2F;}
+    border-color: #272D2F;
+    cursor: pointer;
+    
+  }
+
+  .clickpt{border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    background-color: #FFC529;
+    text-align: center;
+    margin-left: 2%;
+    font-size: 130%;
+    padding-left: 1px;
+    padding-top:2px;
+    font-weight: bold;
+    border-style: solid;
+    border-color: #272D2F;
+    cursor: pointer;
+    
+  }
 .link{
     border-style: solid;
     border-color: #272D2F;
-    margin-left: 2.75%;
+    margin-left: 3%;
     height: 20px;
     margin-top: 1%;
     margin-bottom: 1%;

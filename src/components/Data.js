@@ -3,7 +3,7 @@ import './anuragstyles.css'
 
 
 const Data = (props) => {
-    const {fun} = props;
+    const {fun,fun2,clickinf,ke} = props;
     const [hover,setHover]=useState(false)
  
     const info =props.info
@@ -11,7 +11,13 @@ const Data = (props) => {
     <>
     <div className='link'></div>
     <div style={{display : "flex", flexDirection: "row"}}>
-    <div onClick={()=>{fun(info)}} className={!hover?'datpt':'ddt'} onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}></div> <div style={{paddingBottom: "2px"}}>- {info.time}</div></div>
+    <div onClick={()=>{
+      fun(info);
+    
+     
+      fun2(ke);
+      
+      }} className={ke===clickinf?"clickpt":(!hover?'datpt':'ddt')} onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}>i</div> <div style={{marginLeft:"5px",marginTop: "1px",fontWeight: "bold",paddingLeft:"5px"}}>- {info.time}</div></div>
     </>
   )
 }

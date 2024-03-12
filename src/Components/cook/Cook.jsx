@@ -18,7 +18,7 @@ export default function Cook() {
 	return (
 		<DndProvider backend={HTML5Backend}>
 			{/* <Sidebar /> */}
-			<div className="flex justify-center items-center mt-14">
+			<div className="flex justify-center items-center mt-14 ">
 				<p className=" w-100 max-w-md font-bold text-lg text-center flex flex-row items-center border border-gray-400 border-solid  rounded-lg p-4">
 					Cook's Area
 					<img className="h-40 w-60 ml-4" src="./chef.svg" />
