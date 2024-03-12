@@ -7,6 +7,7 @@ import NotificationsBoard from './NotificationsBoard';
 import TableDetailsPopup from './TableDetailsPopup';
 import terms from './terms';
 import StatisticsBar from './StatisticsBar';
+import Logo from "../imgs/Logo.png"
 
 function Waitercom(props) {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ function Waitercom(props) {
   return (<>
     <div className='nav'>
       <div id="fir">
-      <div id='ine'><img className='imag' src="./imgs/Logo.png" /></div><div id='tuo'>FLAMES KITCHEN</div></div>
+      <div id='ine'><img className='imag' src={Logo} /></div><div id='tuo'>FLAMES KITCHEN</div></div>
         
         <div id='tex'><div id='usern'>Hello {terms.user.name}</div>
                              <div className='buttona' id='log'  onClick={()=>{handleLogout()}}>
