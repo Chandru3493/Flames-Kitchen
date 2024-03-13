@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 import axios from "axios";
+import "./tail.css";
 // import socketIOClient from 'socket.io-client';
 
 const ListTasks = ({ tasks, setTasks, user }) => {
@@ -10,11 +11,6 @@ const ListTasks = ({ tasks, setTasks, user }) => {
 	const [closed, setClosed] = useState([]);
 
 	useEffect(() => {
-		// 	const sock = socketIOClient('http://localhost:4000');
-		// sock.on('update', () => {
-		// 	console.log('this is socket');
-		// 	fetchTasks();
-		//   });
 		fetchTasks();
 	}, []);
 
@@ -31,7 +27,7 @@ const ListTasks = ({ tasks, setTasks, user }) => {
 			console.log("Ftodos: ", ftodos);
 			console.log("Response: ", response.data);
 			const fInProgress = fetchedTasks.filter(
-				(task) => task.status === "inprogress" && task.cook_id === user.id
+				(task) => task.status === "inprogress"
 			);
 			console.log("FinProgress: ", fInProgress);
 			const fClosed = fetchedTasks.filter((task) => task.status === "closed");
@@ -122,12 +118,15 @@ const Section = ({
 	switch (status) {
 		case "todo":
 			bg = "bg-slate-500";
+			text = "Ordered";
 			break;
 		case "inprogress":
 			bg = "bg-purple-500";
+			text = "Preparing";
 			break;
 		case "closed":
 			bg = "bg-green-500";
+			text = "Completed";
 			break;
 		default:
 			bg = "bg-slate-500";
@@ -169,27 +168,36 @@ const Section = ({
 	};
 
 	return (
-		<div
-			ref={drop}
-			className={`w-64 rounded-md p-2 ${isOver ? "bg-slate-200" : ""}`}
-		>
+		<div>
 			<Header text={text} bg={bg} count={tasksToMap.length} />
-			{tasksToMap.map((task) => {
-				{
-					/* console.log("Task: ", task.menuitem.name); // Print task.id to the console */
-				}
-				return (
-					<div key={task.id}>
-						<Task
-							task={task}
-							tasks={tasks}
-							setTasks={setTasks}
-							addItemToSection={addItemToSection}
-							fetchTasks={fetchTasks}
-						/>
-					</div>
-				);
-			})}
+			<div
+				ref={drop}
+				className={`w-64 rounded-md p-1 m-12 mt-2 overflow-y-auto h-72 scrollbar-w-2  ${
+					isOver ? "bg-slate-200" : ""
+				}`}
+				style={{
+					scrollbarWidth: "thin", // For Firefox
+					scrollbarColor: "#4A5568 #CBD5E0", // For Firefox
+					msOverflowStyle: "none",
+				}}
+			>
+				{tasksToMap.map((task) => {
+					{
+						/* console.log("Task: ", task.menuitem.name); // Print task.id to the console */
+					}
+					return (
+						<div key={task.id}>
+							<Task
+								task={task}
+								tasks={tasks}
+								setTasks={setTasks}
+								addItemToSection={addItemToSection}
+								fetchTasks={fetchTasks}
+							/>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };
@@ -197,7 +205,7 @@ const Section = ({
 const Header = ({ text, bg, count }) => {
 	return (
 		<div
-			className={`${bg} flex items-center h-12 pl-4 rounded-md uppercase text-white text-sm`}
+			className={`${bg} flex items-center h-14 ml-4 mr-4  rounded-md uppercase text-white text-md justify-center `}
 		>
 			{text}
 			<div className="ml-2 bg-white w-5 h-5 text-black rounded-full flex items-center justify-center">
@@ -241,13 +249,13 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 	return (
 		<div
 			ref={drag}
-			className={`relative p-4 mt-8 shadow-md ${
+			className={` relative p-4 mt-3  shadow-md ${
 				isDragging ? "opacity-25" : "opacity-100"
 			} rounded-md cursor-grab`}
 		>
 			<p>{task.menuitem.name}</p>
 			<button
-				className="absolute bottom-1 right-8 w-5 h-6"
+				className="absolute bottom-1 right-8 w-5 h-6 "
 				onClick={handleToggleDetails}
 			>
 				<img src="information.png" alt="" />
@@ -291,87 +299,11 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 					</div>
 				</div>
 			)}
-			<button
-				className="absolute bottom-1 right-1 text-slate-400"
-				onClick={() => handleRemove(task.id)}
-			>
-				{/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                </svg>
-                */}
+			<button className="absolute bottom-1 right-1 text-white border border-gray-800 rounded-full bg-black p-2 w-6 h-6 flex items-center justify-center">
+				{task.cook_id}
 			</button>
 		</div>
 	);
 };
-
-// const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
-// 	const [{ isDragging }, drag] = useDrag(() => ({
-// 		type: "task",
-// 		item: { id: task.id },
-// 		collect: (monitor) => ({
-// 			isDragging: !!monitor.isDragging(),
-// 		}),
-// 	}));
-
-// 	const handleRemove = async (id) => {
-// 		try {
-// 			const response = await axios.delete(
-// 				`http://localhost:4000/orderItems/${id}`
-// 			);
-// 			console.log("Id: ", id);
-// 			if (response.status === 200) {
-// 				toast("Task removed", { icon: "💀" });
-// 				// Refresh tasks after deletion
-// 				fetchTasks();
-// 			}
-// 		} catch (error) {
-// 			console.error("Error removing task:", error);
-// 		}
-// 	};
-
-// 	return (
-// 		<div
-// 			ref={drag}
-// 			className={`relative p-4 mt-8 shadow-md ${
-// 				isDragging ? "opacity-25" : "opacity-100"
-// 			} rounded-md cursor-grab`}
-// 		>
-// 			<p>{task.menuitem.name}</p>
-// 			<button className="absolute bottom-1 right-8 w-5 h-6">
-// 				<img src="information.png" alt="" />
-// 			</button>
-// 			<button
-// 				className="absolute bottom-1 right-1 text-slate-400"
-// 				onClick={() => handleRemove(task.id)}
-// 			>
-// 				<svg
-// 					xmlns="http://www.w3.org/2000/svg"
-// 					fill="none"
-// 					viewBox="0 0 24 24"
-// 					strokeWidth={1.5}
-// 					stroke="currentColor"
-// 					className="w-6 h-6"
-// 				>
-// 					<path
-// 						strokeLinecap="round"
-// 						strokeLinejoin="round"
-// 						d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-// 					/>
-// 				</svg>
-// 			</button>
-// 		</div>
-// 	);
-// };
 
 export default ListTasks;
