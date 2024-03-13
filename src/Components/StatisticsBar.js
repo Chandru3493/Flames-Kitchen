@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../waiter.css'; 
+
 
 function StatisticsBar({ data }) {
   if (data && data ? data : true) {

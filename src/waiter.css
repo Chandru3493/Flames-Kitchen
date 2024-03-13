@@ -413,14 +413,18 @@
 }
 
 .nav {
-  width: 100%;
+  width: 100vmax;
   border-bottom: solid 1px #272D2F;
-  padding: 1%;
+  
   background-color: #272D2F; 
   display: flex; /* Use Flexbox for easy layout */
-  justify-content: space-between; /* Distribute space between elements */
+  justify-content: space-between; 
   align-items: center; /* Vertically center elements */
 }
+
+
+
+
 
 @media (max-width: 768px) {
   #tuo {

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../waiter.css'; // Assuming your CSS is in the correct location
+ // Assuming your CSS is in the correct location
 
-function NotificationsBoard() { // No need for props at this point
+function NotificationsBoard({data}) { // No need for props at this point
   const [notifications, setNotifications] = useState([]);
   const [currentOrderId, setCurrentOrderId] = useState(null);
-
+  if (data && data ? data : true) {
+    import('../waiter.css');
+  }
   useEffect(() => {
+
     const intervalId = setInterval(() => {
      
       fetchNotifications(); // Fetches all 'done' orders currently
