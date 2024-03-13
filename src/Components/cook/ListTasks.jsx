@@ -219,6 +219,7 @@ const Header = ({ text, bg, count }) => {
 };
 
 const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
+	
 	const [{ isDragging }, drag] = useDrag(() => ({
 		type: "task",
 		item: { id: task.id },
@@ -293,8 +294,8 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 						</div>
 						<div className="mt-4">
 							<h2 className="text-xl font-bold mb-4">Task Details</h2>
-							<p className="mb-2">Table ID: {task.tableId}</p>
-							<p className="mb-2">Waiter ID: {task.waiterId}</p>
+							<p className="mb-2">Table ID: {task.order.table_id}</p>
+							<p className="mb-2">Waiter ID: {task.order.waiter_id}</p>
 							<p className="mb-2">Cook ID: {task.cook_id}</p>
 							<p className="mb-2">Quantity: {task.quantity}</p>
 							<p>Description: {task.menuitem.description}</p>
