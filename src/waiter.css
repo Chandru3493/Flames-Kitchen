@@ -6,7 +6,10 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 40px;
+
 }
+
+
 
 .table-button {
   color: #272D2F;
@@ -55,8 +58,8 @@
   }
 
   .table-button {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
   }
 }
 
@@ -84,7 +87,7 @@
   color: black;
   background-color: #ffc529;
   border: none;
-  padding: 5px 8px;
+  padding: 50px;
   border-radius: 50%;
   z-index: 1002;
 }
@@ -110,11 +113,29 @@
 }
 
 
+
+.restaurant-header {
+  background-color: #f0e8df; /* Soft, elegant background */
+  color: #38220f; /* Rich, darker text color */
+  padding: 30px;
+  border-radius: 10px; 
+  text-align: center;  
+  margin-bottom: 30px; 
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  font-family: 'Lora', serif; /* A classic serif font for elegance */
+}
+
 .welcome-message {
-  color: #272d2f;
-  margin: 40px;
-  font-size: 40px;
-  font-weight: bolder;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+.role, 
+.roleid {
+  font-size: 18px;
+  font-style: italic; /* A touch of elegance */
 }
 
 /* Status Colors */
@@ -342,6 +363,10 @@
   position: relative;
 }
 
+#ine {
+  margin-right: 10px; /* Add space between logo and text */
+}
+
 #tuo {
   color: #D7D7D7;
   font-family: Copperplate, Copperplate Gothic Light, fantasy;
@@ -370,6 +395,7 @@
   display: flex;
   flex-direction: row;
   width: 70%;
+  align-items: center;
 }
 
 #log {
@@ -390,9 +416,36 @@
   width: 100%;
   border-bottom: solid 1px #272D2F;
   padding: 1%;
-  background-color: #272D2F;
+  background-color: #272D2F; 
+  display: flex; /* Use Flexbox for easy layout */
+  justify-content: space-between; /* Distribute space between elements */
+  align-items: center; /* Vertically center elements */
 }
 
+@media (max-width: 768px) {
+  #tuo {
+    font-size: 120%; /* Reduce font size for smaller screens */
+  }
+  #log {
+    font-size: 60%; 
+  }
+}
+
+@media (max-width: 576px) {
+  .nav {
+    flex-direction: column; /* Stack elements vertically on very small screens */
+    align-items: flex-start; /* Align to the start (left) */
+  }
+
+  #fir, #tex {
+    width: 100%; /* Make both sections take full width */
+    margin-bottom: 10px; /* Add space between them */
+  }
+
+  #tex {
+    justify-content: space-between; /* Distribute user info and logout button */
+  }
+}
 .modal-dialog table-details-modal.modal-dialog-centered {
   z-index: 999;
 }
@@ -435,7 +488,7 @@
 .notifications-board {
   position: relative;
   width: 500px;
-  height: 550px; /* Limit the visible height */
+  height: 550px;
   top: 240px;
   color:#272d2f;
   padding: 20px;
@@ -444,19 +497,27 @@
   background-color: #ffc529; 
   border: 1px solid #ddd; 
   border-radius: 8px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
   z-index: 1000;
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 550px;
+  overflow-y: auto; 
 }
 
+.notifications-board h3 { 
+  font-weight: bolder;
+  padding-left: 50px;
+  margin-left: 20px;
+} 
+
 .notification-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background: linear-gradient(to bottom, #333, #111); /* Dark gradient */
+  color: #fff; /* White text */
+  border: 1px solid #444; /* Slightly darker border */
   margin-bottom: 10px; 
   padding: 15px; 
-  border-radius: 5px; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px; /* Slightly more rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Stronger shadow for contrast */
 }
 
 .notification-card p {
@@ -472,17 +533,20 @@
   font-weight: bolder;
   position: absolute;
   top: 150px; 
-  display: flex; /* Use Flexbox for easy arrangement */
+  display: flex; 
   flex-direction: column; 
   justify-content: space-around;
-  align-items: flex-start; /* Align items to the beginning */
+  align-items: flex-start; 
   width: 500px; 
   padding: 10px;
   border-radius: 8px;
   margin: 10px;
   background-color: #ffc529; 
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); 
   z-index: 1000;
+  max-height: 320px;
+  overflow-y: auto;
+
 }
 
 .statistics-bar div {
@@ -491,7 +555,7 @@
   align-items: center; 
   width: 100%;
   margin-bottom: 10px; 
-  background-color: #fff; /* White background for contrast */
+  background-color: #fff; 
   border-radius: 5px; 
   padding: 5px; 
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
@@ -544,6 +608,13 @@
   border-radius: 3px;
 }
 
+@media (max-width: 576px) { 
+  .notifications-board,
+  .statistics-bar {
+    overflow-y: scroll;    /* Use standard scrolling for small screens */
+    -webkit-overflow-scrolling: touch; /* Enable smooth momentum scrolling on iOS */
+  }
+}
 
 
 

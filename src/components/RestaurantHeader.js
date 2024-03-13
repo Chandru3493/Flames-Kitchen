@@ -11,6 +11,8 @@ function RestaurantHeader(props) {
       <div className="welcome-message">
       {terms.user.name}'s DASHBOARD
       </div> 
+      <div className="role"> Role: Waiter</div>
+      <div className="roleid"> ID: {terms.user.id} </div>
     </header>
   );
 }

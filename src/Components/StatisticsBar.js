@@ -33,6 +33,28 @@ function StatisticsBar({ data }) {
     fetchStats();
   }, []);
 
+  const enhanceTouchScrolling = (element) => {
+    element.addEventListener('touchstart', () => {
+      element.style.overflow = 'auto';  // Temporarily enable standard scrolling
+    });
+    element.addEventListener('touchend', () => {
+      element.style.overflow = 'hidden'; // Re-disable standard scrolling
+    });
+  };
+  
+  // Inside your NotificationsBoard and StatisticsBar components:
+  useEffect(() => {
+    const boardElement = document.querySelector('.notifications-board'); 
+    const statsElement = document.querySelector('.statistics-bar'); 
+  
+    if (boardElement) {
+      enhanceTouchScrolling(boardElement);
+    }
+    if (statsElement) {
+      enhanceTouchScrolling(statsElement);
+    }
+  }, []); 
+
   return (
     <div className="statistics-bar">
   <div>Orders Placed: <p>{stats.todo}</p></div>

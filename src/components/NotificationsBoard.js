@@ -14,6 +14,28 @@ function NotificationsBoard() { // No need for props at this point
     }, 2000); 
 
     return () => clearInterval(intervalId);
+  }, []);
+
+  const enhanceTouchScrolling = (element) => {
+    element.addEventListener('touchstart', () => {
+      element.style.overflow = 'auto';  // Temporarily enable standard scrolling
+    });
+    element.addEventListener('touchend', () => {
+      element.style.overflow = 'hidden'; // Re-disable standard scrolling
+    });
+  };
+  
+  
+  useEffect(() => {
+    const boardElement = document.querySelector('.notifications-board'); 
+    const statsElement = document.querySelector('.statistics-bar'); 
+  
+    if (boardElement) {
+      enhanceTouchScrolling(boardElement);
+    }
+    if (statsElement) {
+      enhanceTouchScrolling(statsElement);
+    }
   }, []); 
 
   const fetchNotifications = async () => {
@@ -38,7 +60,7 @@ function NotificationsBoard() { // No need for props at this point
 
   return (
     <div className="notifications-board">
-      <h3>Notifications</h3>
+      <h2>Notifications</h2>
 
       <ul>
         {notifications.map((notification, index) => (
