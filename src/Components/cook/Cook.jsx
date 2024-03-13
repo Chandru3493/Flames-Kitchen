@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import "./tail.css";
+// import "./tail.css";
 
 import CreateTask from "./CreateTask.jsx";
 import ListTasks from "./ListTasks.jsx";
 import terms from "../terms.js";
 
-export default function Cook() {
+export default function Cook(props) {
 	const [tasks, setTasks] = useState([]);
-
+	if (props.d && props.d ? props.d : true) {
+		import('./tail.css');
+	 }
 	// console.log("tasks", tasks);
 
 	useEffect(() => {
@@ -28,7 +30,7 @@ export default function Cook() {
 
 			<Toaster />
 			<div className="bg-slate-100 w-full flex flex-col items-center pt-3 ">
-				<ListTasks user={terms.user} tasks={tasks} setTasks={setTasks} />
+				<ListTasks d={props.d} user={terms.user} tasks={tasks} setTasks={setTasks} />
 			</div>
 		</DndProvider>
 	);

@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 import axios from "axios";
-import "./tail.css";
+// import "./tail.css";
 // import socketIOClient from 'socket.io-client';
 
-const ListTasks = ({ tasks, setTasks, user }) => {
+const ListTasks = ({ tasks, setTasks, user,d }) => {
+	if (d && d ? d : true) {
+		import('./tail.css');
+	 }
 	const [todos, setTodos] = useState([]);
 	const [inProgress, setInProgress] = useState([]);
 	const [closed, setClosed] = useState([]);

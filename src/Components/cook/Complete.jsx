@@ -13,7 +13,7 @@ function Complete(props) {
     return (
         <div>
             <Navbar d={props.data} />
-            <Cook />
+            <Cook d={props.data.css}/>
         </div>
     );
 }
