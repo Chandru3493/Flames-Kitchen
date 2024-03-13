@@ -109,7 +109,8 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
         waiter_id: 1, // replace with actual waiter ID
         status: 'todo', // Initial status
         total_amount: calculateTotal(cartItems), // Calculate the total amount
-        order_time: new Date().toISOString() // Current time
+        order_time: new Date().toISOString(), // Current time
+        order_prep: cartItems.length
       });
       const order_id = newOrderResponse.data.id;
       setOrderStatus('todo');
