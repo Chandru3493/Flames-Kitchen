@@ -219,7 +219,7 @@ const Header = ({ text, bg, count }) => {
 };
 
 const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
-	
+	console.log(task);
 	const [{ isDragging }, drag] = useDrag(() => ({
 		type: "task",
 		item: { id: task.id },

@@ -4,6 +4,7 @@ import CategoryMenu from './CategoryMenu';
 import MenuItems from './MenuItems';
 import OrderSummary from './OrderSummary';
 import axios from 'axios';
+import terms from './terms';
 
 
 function OrderTakingPopup({ show, onClose, tableNumber,data }) {
@@ -106,7 +107,7 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
       // 1. Create the order on the backend
       const newOrderResponse = await axios.post('http://localhost:4000/api/orders', {
         table_id: tableNumber, // Pass in the table number
-        waiter_id: 1, // replace with actual waiter ID
+        waiter_id: terms.user.id, // replace with actual waiter ID
         status: 'todo', // Initial status
         total_amount: calculateTotal(cartItems), // Calculate the total amount
         order_time: new Date().toISOString(), // Current time
@@ -120,7 +121,7 @@ function OrderTakingPopup({ show, onClose, tableNumber,data }) {
         axios.post('http://localhost:4000/api/order-items', {
           order_id,
           menu_item_id: item.id,
-          cook_id: 1, // replace with actual cook ID
+          cook_id: null, // replace with actual cook ID
           status: 'todo',
           price: item.price,
           quantity: item.quantity,
