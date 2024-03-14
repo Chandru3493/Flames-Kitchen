@@ -5,10 +5,10 @@ import axios from "axios";
 // import "./tail.css";
 // import socketIOClient from 'socket.io-client';
 
-const ListTasks = ({ tasks, setTasks, user,d }) => {
+const ListTasks = ({ tasks, setTasks, user, d }) => {
 	if (d && d ? d : true) {
-		import('./tail.css');
-	 }
+		import("./tail.css");
+	}
 	const [todos, setTodos] = useState([]);
 	const [inProgress, setInProgress] = useState([]);
 	const [closed, setClosed] = useState([]);
@@ -52,7 +52,7 @@ const ListTasks = ({ tasks, setTasks, user,d }) => {
 				// Check if orderItemId is defined
 				console.log("order id : ", orderItemId);
 				const response = await axios.get(
-					`http://localhost:4000/orderItems/count`,
+					"http://localhost:4000/orderItems/count",
 					{ params: { orderItemId } }
 				);
 
@@ -292,13 +292,33 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 								</svg>
 							</button>
 						</div>
-						<div className="mt-4">
-							<h2 className="text-xl font-bold mb-4">Task Details</h2>
-							<p className="mb-2">Table ID: {task.order.table_id}</p>
-							<p className="mb-2">Waiter ID: {task.order.waiter_id}</p>
-							<p className="mb-2">Cook ID: {task.cook_id}</p>
-							<p className="mb-2">Quantity: {task.quantity}</p>
-							<p>Description: {task.menuitem.description}</p>
+
+						<div className="mt-4 border rounded-lg p-6 bg-gray-100">
+							<h2 className="text-4xl font-bold mb-4">Task Details</h2>
+							<div className="grid grid-cols-2 gap-4">
+								<div>
+									<p className="mb-2 text-lg">
+										<span className="font-bold">Table ID:</span>{" "}
+										{task.order.table_id}
+									</p>
+									<p className="mb-2 text-lg">
+										<span className="font-bold">Waiter ID:</span>{" "}
+										{task.order.waiter_id}
+									</p>
+									<p className="mb-2 text-lg">
+										<span className="font-bold">Cook ID:</span> {task.cook_id}
+									</p>
+									<p className="mb-2 text-lg">
+										<span className="font-bold">Quantity:</span> {task.quantity}
+									</p>
+								</div>
+								<div>
+									<p className="mb-2 text-lg">
+										<span className="font-bold">Description:</span>{" "}
+										{task.menuitem.description}
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
