@@ -294,7 +294,7 @@ const Task = ({ task, tasks, setTasks, addItemToSection, fetchTasks }) => {
 						</div>
 
 						<div className="mt-4 border rounded-lg p-6 bg-gray-100">
-							<h2 className="text-4xl font-bold mb-4">Task Details</h2>
+							<h2 className="text-4xl font-bold mb-4">Order Details</h2>
 							<div className="grid grid-cols-2 gap-4">
 								<div>
 									<p className="mb-2 text-lg">
