@@ -106,13 +106,13 @@ function TableDetailsPopup({ selectedTable, onClose }) {
   console.log('TableDetailsPopup rendered, selectedTable:', selectedTable); 
   return (
     <>
-      {selectedTable && (
+      {/* {selectedTable && (
         <div className="backdrop" onClick={() => {
           console.log('Backdrop clicked');
           onClose();
         }}>
       </div>
-      )}
+      )} */}
       <Modal
         show={selectedTable !== null}
         onHide={() => {

@@ -54,8 +54,8 @@ function Waitercom(props) {
         <TableArea data={props.data.wtcss} onTableSelect={handleTableSelect} />
         <TableDetailsPopup data={props.data.wtcss} selectedTable={selectedTable} onClose={handleClosePopup} />
         <div className='side-area'>
-        <NotificationsBoard data={props.data.wtcss} />
-        <StatisticsBar data={props.data.wtcss} />         
+        <NotificationsBoard data={props.data.wtcss} pullable />
+        <StatisticsBar data={props.data.wtcss} pullable/>         
         </div>
       </div>
 

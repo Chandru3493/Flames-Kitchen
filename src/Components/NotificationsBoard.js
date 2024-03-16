@@ -65,14 +65,14 @@ function NotificationsBoard({data}) { // No need for props at this point
     <div className="notifications-board">
       <h2>Notifications</h2>
 
-      <ul>
+      
         {notifications.map((notification, index) => (
-          <li key={index} className="notification-card"> 
+          <div key={index} className="notification-card"> 
             <p>{notification.message}</p> {/* Display the formatted message */}
             {/* <p className="timestamp">{notification.updatedAt}</p>  */}
-          </li>
+          </div>
         ))}
-      </ul>
+      
     </div>
   );
 }
