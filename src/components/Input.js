@@ -1,9 +1,12 @@
 import React, { Fragment, useEffect, useState} from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import('./anuragstyles.css');
+
 import Edit from "./Edit";
-const Input = () => {
+const Input = (props) => {
+  if (props.data && props.data ? props.data : true) {
+    import('./anuragstyles.css');
+  }
   const [description, setDescription] = useState("");
   const [description1, setDescription1] = useState("");
   const [data, setData] = useState([]);

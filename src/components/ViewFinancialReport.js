@@ -119,7 +119,7 @@ const ViewFinancialReport = (props) => {
           const t = items.toString()
           return(
             <div style={{width: "70%"}}>
-              <Data ke={t} info = {transaction} fun2={clicker} clickinf={click} fun={selection}/>
+              <Data ke={t} info = {transaction} fun2={clicker} clickinf={click} d={props.data} fun={selection}/>
             </div>
          )}
 

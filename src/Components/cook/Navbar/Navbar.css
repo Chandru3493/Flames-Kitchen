@@ -31,6 +31,16 @@
 	
 	
   }
+
+  .buttona {
+    background-color: #FFC529; /* Yellow background */
+    color: #272D2F; /* Black text color */
+    padding: 10px 10px; /* Adjust padding as needed */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+    font-weight: bold; /* Bold text */
+  }
   
   
   

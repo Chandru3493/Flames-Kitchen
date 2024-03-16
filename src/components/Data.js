@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import './anuragstyles.css'
+
 
 
 const Data = (props) => {
     const {fun,fun2,clickinf,ke} = props;
+    if (props.data && props.data ? props.data : true) {
+      import('./anuragstyles.css');
+    }
     const [hover,setHover]=useState(false)
  
     const info =props.info
