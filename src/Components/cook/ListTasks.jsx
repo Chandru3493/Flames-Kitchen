@@ -76,7 +76,7 @@ const ListTasks = ({ tasks, setTasks, user, d }) => {
 
 	return (
 		<>
-			<div className="flex gap-16">
+			<div className="flex gap-4">
 				{["todo", "inprogress", "closed"].map((status, index) => (
 					<Section
 						use={user}

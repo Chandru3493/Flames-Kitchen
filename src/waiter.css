@@ -10,6 +10,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 40px;
+  overflow: auto;
 
 }
 
@@ -419,7 +420,7 @@
 }
 
 .nav {
-  width: 100vmax;
+  width: 110vmax;
   border-bottom: solid 1px #272D2F;
   
   background-color: #272D2F; 
@@ -1316,7 +1317,3 @@ er-radius: 3px;
  
   /* ... other adjustments as needed ... */
 }
-
-
-
-

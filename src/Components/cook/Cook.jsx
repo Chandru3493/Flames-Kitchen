@@ -29,6 +29,7 @@ export default function Cook(props) {
 			</div>
 
 			<Toaster />
+			
 			<div className="bg-slate-100 w-full flex flex-col items-center pt-3 ">
 				<ListTasks
 					d={props.d}
@@ -37,6 +38,7 @@ export default function Cook(props) {
 					setTasks={setTasks}
 				/>
 			</div>
+			
 		</DndProvider>
 	);
 }
