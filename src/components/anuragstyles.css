@@ -15,9 +15,7 @@
 
 
 }
-/* #ine{
 
-} */
 
 #tuo{
   color:#D7D7D7;
@@ -336,7 +334,7 @@ width: 70%;
 }
 
 .datavisualiser{
-    margin-top: 3%;
+    margin-top: 5%;
     width:100%;
     height: 70vh;
     display: flex;
@@ -358,17 +356,17 @@ width: 70%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    
+   
 }
 
 
 .board{
-    width: 50%;
-    height: 100%;
+    width: 100px;
+    height: 500px;
     border-style: solid;
     padding: 1%;
     border-radius: 20px;
-    overflow-x: scroll;
+    overflow: auto;
     
 }
 
@@ -497,9 +495,10 @@ width: 70%;
     font-weight: bold; /* Bold text */
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 97%;
     height:139px;
-    margin: 4px;
+    margin: 10px;
+    
   }
 
   .cardphotoi {

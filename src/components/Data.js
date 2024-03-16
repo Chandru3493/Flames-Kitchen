@@ -9,7 +9,7 @@ const Data = (props) => {
     const info =props.info
   return (
     <>
-    <div className='link'></div>
+    <div className='link bg-primary'></div>
     <div style={{display : "flex", flexDirection: "row"}}>
     <div onClick={()=>{
       fun(info);

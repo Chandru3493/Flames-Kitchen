@@ -65,11 +65,15 @@ const ViewEmployee = (props) => {
 
   return (
     <div className='viewfull'>
-      <h2 className='heading' >Employee Information search portal</h2>
-      <div className="inpone">
-      <p className='inptext'>Enter Employee name</p>
-    <input type="button" className='buttona' id='addemp' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> <input value={inp} className='inp' disabled={add} onChange={(e)=>{setInp(e.target.value)}} id='searchbaremp' type='text'/><input className='buttona' type="button" id='searchemp' disabled={add} onClick={handlesearch} value="Search"/>
+      <div className="d-flex justify-content-between ">
+      <h4 className='text-center mt-4 ml-3' >Employee Info portal</h4>
       
+    <div className='d-flex mt-4'>
+    
+    <input value={inp} className='form-control' disabled={add} onChange={(e)=>{setInp(e.target.value)}} type='text' placeholder='Enter Employee Name'/>
+    <input className='buttona ml-1 px-3' type="button" id='searchemp' disabled={add} onClick={handlesearch} value="Search"/>
+    <input type="button" className='buttona ml-3 mr-3 px-3' id='addemp' onClick={()=>{setAdd(true);setFound(false);setView(false)}} value="Add Employee"/> 
+    </div> 
     </div>
     {found && <div className='megbox'>
     

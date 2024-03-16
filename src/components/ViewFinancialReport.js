@@ -89,17 +89,28 @@ const ViewFinancialReport = (props) => {
 
   }
   return (<>
+  
   <div className='viewfull'>
     <div className='abovefin'>
-    <div className='heading'>Financial Data visualiser</div>
-    <div className='inpone' id="fininp">
-    <p className='inptext'>Enter Date in DD-MM-YYYY</p>
+    {//<div className='inpone' id="fininp">
+}
+    <div className='d-flex justify-content-between align-items-end'>
+    
+    <h4 className='ml-3 pb-2'>Financial Data visualiser</h4>
+   
+
+        
+        <div className='mr-5 mt-4'>
+        <p className='inptext'>Enter Date in DD-MM-YYYY</p>
     <div className='vissearch'><DatePicker selected={startDate} onChange={(date)=>{setStartDate(date);}} dateFormat="dd/MM/yyyy" className="form-control"/><input className='buttona' id='searchemp' type='button' onClick={handlesearch} value="Search"/></div>
-   </div></div>
+        </div>
+
+   </div>
+  </div>
     
  
  {find && found &&
-  <div className='datavisualiser'>
+  <div className='datavisualiser ml-5'>
     <div className='chart'>
       <div className='buttona'  id='start'>{found.starting_balance}</div>
       <div className='callus'>
@@ -107,7 +118,10 @@ const ViewFinancialReport = (props) => {
           items++;
           const t = items.toString()
           return(
-         <Data ke={t} info = {transaction} fun2={clicker} clickinf={click} fun={selection}/>)}
+            <div style={{width: "70%"}}>
+              <Data ke={t} info = {transaction} fun2={clicker} clickinf={click} fun={selection}/>
+            </div>
+         )}
 
         )}
       </div>
@@ -115,7 +129,7 @@ const ViewFinancialReport = (props) => {
 
     </div>
     {select &&
-    <div className='board' ><Transaction data={props.data} jargon={select} /></div>}
+    <div className='board ' style={{width: "40%"}} ><Transaction data={props.data} jargon={select} /></div>}
 
 
   </div>}

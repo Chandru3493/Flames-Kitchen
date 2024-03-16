@@ -6,7 +6,7 @@ const Transaction = (props) => {
   }
     const data=props.jargon
   return (
-    <div style={{width: "100%"}}>
+    <div className='' style={{width: "100%"}}>
         <p className='infoline'><div className='bold'>Balance at Start of Transaction</div>     : {data.type==="food order"?data.curbal-data.sum:data.curbal+data.sum}</p>
         <p className='infoline'><div className='bold'>Time of transaction</div>     : {data.time}</p>
         <p className='infoline'><div className='bold'>Mode of Transaction</div>     : {data.mode}</p>
